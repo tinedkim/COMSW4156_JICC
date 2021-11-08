@@ -1,11 +1,14 @@
 from bs4 import BeautifulSoup
 from scrapingant_client import ScrapingAntClient
+from dotenv import load_dotenv
+import os
 import requests
-
 
 dining_url = 'https://dining.columbia.edu/'
 
-client = ScrapingAntClient(token='8a2062388f4f4cba84269e04c380cd10')
+load_dotenv()
+token = os.environ.get("scraping-token")
+client = ScrapingAntClient(token=token)
 
 content= client.general_request(dining_url).content
 soup = BeautifulSoup(content, features='html5lib')
