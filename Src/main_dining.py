@@ -4,7 +4,6 @@ import requests
 
 
 dining_url = 'https://dining.columbia.edu/'
-r = requests.get(dining_url)
 
 client = ScrapingAntClient(token='8a2062388f4f4cba84269e04c380cd10')
 
