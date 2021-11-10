@@ -30,3 +30,18 @@ def scrape_all():
             menu.update({food_name: img_url})
             
     return menus
+
+def scrape_hall(dining_hall_url):
+    menu = {}
+
+    content= client.general_request(dining_hall_url).content
+    soup = BeautifulSoup(content, features='html5lib')
+    
+    food_items = soup.find('div', attrs = {'class': 'cu-dining-meals'})
+    for item in food_items.findAll('div', attrs = {'class': 'meal-content'}):
+        food_name = item.find('h5').text
+        image_style = item.find('div', attrs = {'class': 'image bg animated'})["style"]
+        img_url = image_style.split(' ')[-1]
+        menu.update({food_name: img_url})
+
+    return menu
