@@ -32,7 +32,8 @@ def getDiningHallMenuItems(diningHall):
     items=[]
     with engine.connect() as connection:
         cursor = connection.execute('SELECT* FROM foodItem where diningHall = %s', diningHall)
-        for result in cursor:
-            items.append(result)
+        cur = cursor.fetchall()
+        for result in cur:
+            items.append(dict(result))
         connection.close()
         return items

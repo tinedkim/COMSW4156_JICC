@@ -3,7 +3,7 @@ Begin server at 3000 and expose endpoints
 '''
 
 from flask import Flask, render_template, request, redirect, jsonify
-from json import dump
+from json import dumps
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from requests import get
@@ -14,11 +14,12 @@ import os
 import random
 import time
 
+
 #get dining hall menu items
-@app.route('/getDiningMenu/<hallID>')
+@app.route('/getDiningMenu/<diningHall>')
 def getDiningMenuItems(diningHall):
-    items = database.getDiningMenuItems(diningHall)
-    return items
+    items = database.getDiningHallMenuItems(diningHall)
+    return {"results": items}
 
 #Login Page
 # @app.route('/login')
