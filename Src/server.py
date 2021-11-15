@@ -29,6 +29,11 @@ def getFoodReviews():
     queryName = "foodReviews"
     return {queryName: []}
 
+@app.route("/getDiningHallSignIns")
+def getDiningHallSignIns():
+    queryName = "diningHallSignIns"
+    return {queryName: []}
+
 @app.route("/")
 def landingPage():
     queryName = "CULFA"
