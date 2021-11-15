@@ -24,6 +24,12 @@ def login():
 def signup():
     return "<p>Sign up here</p>"
 
+#Check user credentials
+@app.route('/checkCredentials')
+def checkCredentials():
+    queryName = "checkCredentials"
+    return {queryName: []}
+
 #get dining hall menu items
 @app.route('/getDiningMenu/<hallID>')
 def getDiningMenuItems(hallId):
