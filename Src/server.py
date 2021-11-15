@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 '''
 Begin server at 3000 and expose endpoints
 '''
@@ -20,7 +19,7 @@ def hello_world():
     return "<p>Hello, World!</p>"
 
 #get dining hall menu items
-@app.route('/<hallID>', methods=['POST'])
+@app.route('/getDiningMenu/<hallID>', methods=['POST'])
 def getDiningMenuItems(hallID):
     pass
 
@@ -33,7 +32,6 @@ def login():
 @app.route('/signup')
 def signup():
     return "<p>Sign up here</p>"
-=======
 
 @app.route("/topMenuItems")
 def getTopMenuItems():
@@ -59,7 +57,6 @@ def getFoodReviews():
 def landingPage():
     queryName = "CULFA"
     return "CULFA"
->>>>>>> ce8be250758cd84802f5bad62bd002c766bab0f9
 
 if __name__ == '__main__':
 
