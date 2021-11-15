@@ -58,6 +58,11 @@ def getDiningHalls():
 #     queryName = "getUserHistory"
 #     return {queryName: []}
 
+@app.route('/getFoodItems')
+def getFoodItems():
+    queryName = "getfoodItems"
+    return {queryName: database.getFoodItems()}
+
 #get food reviews
 @app.route("/getFoodReviews/<foodId>")
 def getFoodReviews(foodId):
