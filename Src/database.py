@@ -2,7 +2,6 @@
 Interact with local PostgreSQL database using sql alchemy.
 '''
 
-import psycopg2
 import os
 from dotenv import load_dotenv
 from sqlalchemy import *
@@ -16,9 +15,18 @@ DATABASEURI = "postgresql://postgres:jicc@{0}/postgres".format(ip)
 
 engine = create_engine(DATABASEURI)
 
+def executeQuery(query, values = None, returnResults = True):
+    with engine.connect() as connection:
+        cursor = connection.execute(query) if values is None else connection.execute(query, values)
+        results = None
+        if returnResults:
+            results = cursor.fetchall()
+        connection.close()
+        return results
 
 def populate_menu_items():
     menus = scrape_all()
+    print('scraping completed')
     with engine.connect() as connection:
         for i in range(1, 4):
             dining_hall = menus[i-1]
@@ -28,12 +36,18 @@ def populate_menu_items():
                                     ON CONFLICT (foodName) DO NOTHING", 
                                     key, val, i)
 
+def getRows(cur):
+    return [dict(result) for result in cur]
+
 def getDiningHallMenuItems(diningHall):
-    items=[]
-    with engine.connect() as connection:
-        cursor = connection.execute('SELECT* FROM foodItem where diningHall = %s', diningHall)
-        cur = cursor.fetchall()
-        for result in cur:
-            items.append(dict(result))
-        connection.close()
-        return items
+    return getRows(executeQuery('SELECT* FROM foodItem where diningHall = %s', diningHall))
+    
+    
+def getDiningHalls():
+    return getRows(executeQuery('SELECT * FROM diningHall'))
+
+def getReviewsForFoodItem(foodItemId):
+    return getRows(executeQuery('SELECT * FROM REVIEW where foodItemId = %s', foodItemId))
+
+def getReviewTimestampsForDiningHall(diningHall):
+    return getRows(executeQuery('SELECT date FROM REVIEW inner join foodItem on foodItem.foodItemID = review.foodItemId WHERE foodItem.diningHall = %s', diningHall))
