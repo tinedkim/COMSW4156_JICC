@@ -14,15 +14,6 @@ import time
 
 DATABASEURI = os.environ.get("database-uri")
 
-@app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
-
-#get dining hall menu items
-@app.route('/getDiningMenu/<hallID>', methods=['POST'])
-def getDiningMenuItems(hallID):
-    pass
-
 #Login Page
 @app.route('/login')
 def login():
@@ -32,6 +23,12 @@ def login():
 @app.route('/signup')
 def signup():
     return "<p>Sign up here</p>"
+
+#get dining hall menu items
+@app.route('/getDiningMenu/<hallID>')
+def getDiningMenuItems(hallId):
+    queryName = "getMenuItems"
+    return{queryName:[]}
 
 @app.route("/topMenuItems")
 def getTopMenuItems():
@@ -48,8 +45,8 @@ def getUserHistory():
     queryName = "getUserHistory"
     return {queryName: []}
 
-@app.route("/getFoodReviews/:foodId")
-def getFoodReviews():
+@app.route("/getFoodReviews/<foodId>")
+def getFoodReviews(foodId):
     queryName = "foodReviews"
     return {queryName: []}
 
