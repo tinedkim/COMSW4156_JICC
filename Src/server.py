@@ -30,26 +30,31 @@ def getDiningMenuItems(hallId):
     queryName = "getMenuItems"
     return{queryName:[]}
 
+#get top menu items
 @app.route("/topMenuItems")
 def getTopMenuItems():
     queryName = "topMenuItems"
     return {queryName: []}
 
+#get top dining halls
 @app.route("/topDiningHalls")
 def getTopDiningHalls():
     queryName = "topDiningHalls"
     return {queryName: []}
 
+#get user history
 @app.route("/getUserHistory")
 def getUserHistory():
     queryName = "getUserHistory"
     return {queryName: []}
 
+#get food reviews
 @app.route("/getFoodReviews/<foodId>")
 def getFoodReviews(foodId):
     queryName = "foodReviews"
     return {queryName: []}
 
+#home page
 @app.route("/")
 def landingPage():
     queryName = "CULFA"
