@@ -14,11 +14,12 @@ jjs_url = 'https://dining.columbia.edu/content/jjs-place-0'
 
 def get_content(idx, testing = False):
     urls = [ferris_url, john_jay_url, jjs_url]
-    html = ['ferris.html', 'johnjay.html', 'jjs.html']
+    html = ['../testing/ferris.html', '../testing/johnjay.html', '../testing/jjs.html']
 
     if testing:
         html_file = open(html[idx], "r")
         content = html_file.read()
+        html_file.close()
     else:
         content = client.general_request(urls[idx]).content
 
