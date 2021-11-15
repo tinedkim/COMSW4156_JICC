@@ -1,3 +1,7 @@
+'''
+Interact with local PostgreSQL database using sql alchemy.
+'''
+
 import psycopg2
 import os
 from dotenv import load_dotenv

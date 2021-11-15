@@ -1,6 +1,13 @@
+'''
+Begin server at 3000 and expose endpoints
+'''
+
 from flask import Flask
 import sys
+
+
 app = Flask(__name__)
+
 
 @app.route("/")
 def hello_world():
