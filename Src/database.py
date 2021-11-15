@@ -31,7 +31,7 @@ def populate_menu_items():
 def getDiningHallMenuItems(diningHall):
     items=[]
     with engine.connect() as connection:
-        cursor = connection.excute('SELECT* FROM foodItem where diningHall = %s', diningHall)
+        cursor = connection.execute('SELECT* FROM foodItem where diningHall = %s', diningHall)
         for result in cursor:
             items.append(result)
         connection.close()
