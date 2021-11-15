@@ -27,3 +27,12 @@ def populate_menu_items():
                                     VALUES (%s, %s, %s) \
                                     ON CONFLICT (foodName) DO NOTHING", 
                                     key, val, i)
+
+def getDiningHallMenuItems(diningHall):
+    items=[]
+    with engine.connect() as connection:
+        cursor = connection.excute('SELECT* FROM foodItem where diningHall = %s', diningHall)
+        for result in cursor:
+            items.append(result)
+        connection.close()
+        return items
