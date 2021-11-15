@@ -51,3 +51,6 @@ def getReviewsForFoodItem(foodItemId):
 
 def getReviewTimestampsForDiningHall(diningHall):
     return getRows(executeQuery('SELECT date FROM REVIEW inner join foodItem on foodItem.foodItemID = review.foodItemId WHERE foodItem.diningHall = %s', diningHall))
+
+def getFoodItems():
+    return getRows(executeQuery('SELECT * from foodItem'))

@@ -6,6 +6,27 @@ COMS W4156 Team Project: JICC
 ```python
 @app.route('/getDiningMenu/<hallID>')
 ```
+2. get dining halls
+- this API returns information about each dining hall in the database
+```python
+@app.route('/getDiningHalls')
+```
+3. get food reviews
+- this API receives a food item ID and returns a list of reviews for that item.
+```python
+@app.route("/getFoodReviews/<foodId>")
+```
+4. get dining hall swipes
+- this API receives a dining hall ID and returns a list of timestamps indicating when a person has reviewed that dining hall.
+```python
+@app.route("/getDiningHallSwipes/<diningHall>")
+```
+5. get food item information
+- this API returns information about all the food items in the database
+```python
+@app.route('/getFoodItems')
+```
+
 # Development
 ## Build
 ### Python Setup
