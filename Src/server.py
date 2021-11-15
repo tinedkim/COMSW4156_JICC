@@ -4,15 +4,20 @@ Begin server at 3000 and expose endpoints
 
 from flask import Flask
 import sys
-
+import database
 
 app = Flask(__name__)
 
 
-@app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
+@app.route("/topMenuItems")
+def getTopMenuItems():
+    queryName = "topMenuItems"
+    return {queryName: []}
 
+@app.route("/")
+def landingPage():
+    queryName = "CULFA"
+    return "CULFA"
 
 if __name__ == '__main__':
 
