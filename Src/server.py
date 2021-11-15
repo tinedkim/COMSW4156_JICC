@@ -14,6 +14,21 @@ def getTopMenuItems():
     queryName = "topMenuItems"
     return {queryName: []}
 
+@app.route("/topDiningHalls")
+def getTopDiningHalls():
+    queryName = "topDiningHalls"
+    return {queryName: []}
+
+@app.route("/getUserHistory")
+def getUserHistory():
+    queryName = "getUserHistory"
+    return {queryName: []}
+
+@app.route("/getFoodReviews/:foodId")
+def getFoodReviews():
+    queryName = "foodReviews"
+    return {queryName: []}
+
 @app.route("/")
 def landingPage():
     queryName = "CULFA"
