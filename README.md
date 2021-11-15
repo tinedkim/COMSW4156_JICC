@@ -1,6 +1,11 @@
 # COMSW4156_JICC
 COMS W4156 Team Project: JICC
 # API
+1. get dining hall menu items
+- this API receives a dining hall ID and returns a list of menu items for that dining hall
+```python
+@app.route('/getDiningMenu/<hallID>')
+```
 # Development
 ## Build
 ### Python Setup
@@ -16,11 +21,8 @@ To start the Flask server, run
 ```
 python3 Src/server.py 
 ```
-# API endpoints
-1. get dining hall menu items
-- this API receives a dining hall ID and returns a list of menu items for that dining hall
-```python
-@app.route('/getDiningMenu/<hallID>')
-```
-
 ## Test
+In the source directory:
+```
+python3 -m unittest
+```
