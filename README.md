@@ -20,7 +20,7 @@ python3 Src/server.py
 1. get dining hall menu items
 - this API receives a dining hall ID and returns a list of menu items for that dining hall
 ```python
-@app.route('/getDiningMenu/<hallID>')
+@app.route('/getDiningMenu/<diningHall>')
 ```
 
 ## Test
