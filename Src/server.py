@@ -6,59 +6,59 @@ from flask import Flask, render_template, request, redirect, jsonify
 from json import dump
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
+from requests import get
+import database
 app = Flask(__name__)
 
 import os
 import random
 import time
 
-DATABASEURI = os.environ.get("database-uri")
-
-#Login Page
-@app.route('/login')
-def login():
-    return "<p>Login here</p>"
-
-#Signup Page
-@app.route('/signup')
-def signup():
-    return "<p>Sign up here</p>"
-
-#Check user credentials
-@app.route('/checkCredentials')
-def checkCredentials():
-    queryName = "checkCredentials"
-    return {queryName: []}
-
 #get dining hall menu items
 @app.route('/getDiningMenu/<hallID>')
-def getDiningMenuItems(hallId):
-    queryName = "getMenuItems"
-    return{queryName:[]}
+def getDiningMenuItems(diningHall):
+    items = database.getDiningMenuItems(diningHall)
+    return items
+
+#Login Page
+# @app.route('/login')
+# def login():
+#     return "<p>Login here</p>"
+
+# #Signup Page
+# @app.route('/signup')
+# def signup():
+#     return "<p>Sign up here</p>"
+
+#check user credentials
+# @app.route('/checkCredentials')
+# def checkCredentials():
+#     queryName = "checkCredentials"
+#     return {queryName: []}
 
 #get top menu items
-@app.route("/topMenuItems")
-def getTopMenuItems():
-    queryName = "topMenuItems"
-    return {queryName: []}
+# @app.route("/topMenuItems")
+# def getTopMenuItems():
+#     queryName = "topMenuItems"
+#     return {queryName: []}
 
 #get top dining halls
-@app.route("/topDiningHalls")
-def getTopDiningHalls():
-    queryName = "topDiningHalls"
-    return {queryName: []}
+# @app.route("/topDiningHalls")
+# def getTopDiningHalls():
+#     queryName = "topDiningHalls"
+#     return {queryName: []}
 
 #get user history
-@app.route("/getUserHistory")
-def getUserHistory():
-    queryName = "getUserHistory"
-    return {queryName: []}
+# @app.route("/getUserHistory")
+# def getUserHistory():
+#     queryName = "getUserHistory"
+#     return {queryName: []}
 
 #get food reviews
-@app.route("/getFoodReviews/<foodId>")
-def getFoodReviews(foodId):
-    queryName = "foodReviews"
-    return {queryName: []}
+# @app.route("/getFoodReviews/<foodId>")
+# def getFoodReviews(foodId):
+#     queryName = "foodReviews"
+#     return {queryName: []}
 
 #home page
 @app.route("/")
