@@ -25,7 +25,9 @@ def scrape_all():
         food_items = soup.find('div', attrs={'class': 'cu-dining-meals'})
         for item in food_items.findAll('div', attrs={'class': 'meal-content'}):
             food_name = item.find('h5').text
-            image_style = item.find('div', attrs={'class': 'image bg animated'})["style"]
+            image_style = item.find('div',
+                                    attrs={'class':
+                                           'image bg animated'})["style"]
             img_url = image_style.split(' ')[-1]
             menu.update({food_name: img_url})
 
@@ -41,7 +43,9 @@ def scrape_hall(dining_hall_url):
     food_items = soup.find('div', attrs={'class': 'cu-dining-meals'})
     for item in food_items.findAll('div', attrs={'class': 'meal-content'}):
         food_name = item.find('h5').text
-        image_style = item.find('div', attrs={'class': 'image bg animated'})["style"]
+        image_style = item.find('div',
+                                attrs={'class':
+                                       'image bg animated'})["style"]
         img_url = image_style.split(' ')[-1]
         menu.update({food_name: img_url})
 
