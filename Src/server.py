@@ -49,13 +49,6 @@ def getDiningHallSwipes(diningHall):
     return {queryName: database.getReviewTimestampsForDiningHall(diningHall)}
 
 
-# get dining hall sign ins
-@app.route("/getDiningHallSignIns")
-def getDiningHallSignIns():
-    queryName = "diningHallSignIns"
-    return {queryName: []}
-
-
 # to implement later
 '''
 #home page
@@ -64,38 +57,44 @@ def landingPage():
     queryName = "CULFA"
     return "CULFA"
 
-Login Page
+# Login Page
 @app.route('/login')
 def login():
     return "<p>Login here</p>"
 
-#Signup Page
+# Signup Page
 @app.route('/signup')
 def signup():
     return "<p>Sign up here</p>"
 
-check user credentials
+# check user credentials
 @app.route('/checkCredentials')
 def checkCredentials():
     queryName = "checkCredentials"
     return {queryName: []}
 
-get top menu items
+# get top menu items
 @app.route("/topMenuItems")
 def getTopMenuItems():
     queryName = "topMenuItems"
     return {queryName: []}
 
-get top dining halls
+# get top dining halls
 @app.route("/topDiningHalls")
 def getTopDiningHalls():
     queryName = "topDiningHalls"
     return {queryName: []}
 
-get user history
+# get user history
 @app.route("/getUserHistory")
 def getUserHistory():
     queryName = "getUserHistory"
+    return {queryName: []}
+
+# get dining hall sign ins
+@app.route("/getDiningHallSignIns")
+def getDiningHallSignIns():
+    queryName = "diningHallSignIns"
     return {queryName: []}
 '''
 
