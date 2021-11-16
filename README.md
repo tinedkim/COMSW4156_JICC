@@ -1,6 +1,32 @@
 # COMSW4156_JICC
 COMS W4156 Team Project: JICC
 # API
+1. get dining hall menu items
+- this API receives a dining hall ID and returns a list of menu items for that dining hall
+```python
+@app.route('/getDiningMenu/<hallID>')
+```
+2. get dining halls
+- this API returns information about each dining hall in the database
+```python
+@app.route('/getDiningHalls')
+```
+3. get food reviews
+- this API receives a food item ID and returns a list of reviews for that item.
+```python
+@app.route("/getFoodReviews/<foodId>")
+```
+4. get dining hall swipes
+- this API receives a dining hall ID and returns a list of timestamps indicating when a person has reviewed that dining hall.
+```python
+@app.route("/getDiningHallSwipes/<diningHall>")
+```
+5. get food item information
+- this API returns information about all the food items in the database
+```python
+@app.route('/getFoodItems')
+```
+
 # Development
 ## Build
 ### Python Setup
@@ -10,17 +36,15 @@ source env/bin/activate
 pip3 install -r requirements.txt
 ```
 ### PostgreSQL Setup
-We assume there is a PostgreSQL instance running on port 5432. If one is not started, follow this [guide](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-18-04)
+We assume there is a PostgreSQL instance running on port 5432 in the GCP cluster. If one is not started, follow this [guide](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-18-04)
 ## Run 
 To start the Flask server, run
 ```
 python3 Src/server.py 
 ```
-# API endpoints
-1. get dining hall menu items
-- this API receives a dining hall ID and returns a list of menu items for that dining hall
-```python
-@app.route('/getDiningMenu/<diningHall>')
-```
-
 ## Test
+In the source directory:
+This should take about 2 minutes.
+```
+python3 -m unittest
+```

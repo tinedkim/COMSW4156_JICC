@@ -19,8 +19,11 @@ import time
 @app.route('/getDiningMenu/<diningHall>')
 def getDiningMenuItems(diningHall):
     items = database.getDiningHallMenuItems(diningHall)
-    return {"results": items}
+    return {"diningMenu":items} 
 
+@app.route('/getDiningHalls')
+def getDiningHalls():
+    return {"diningHalls": database.getDiningHalls()}
 #Login Page
 # @app.route('/login')
 # def login():
@@ -55,11 +58,21 @@ def getDiningMenuItems(diningHall):
 #     queryName = "getUserHistory"
 #     return {queryName: []}
 
+@app.route('/getFoodItems')
+def getFoodItems():
+    queryName = "getfoodItems"
+    return {queryName: database.getFoodItems()}
+
 #get food reviews
-# @app.route("/getFoodReviews/<foodId>")
-# def getFoodReviews(foodId):
-#     queryName = "foodReviews"
-#     return {queryName: []}
+@app.route("/getFoodReviews/<foodId>")
+def getFoodReviews(foodId):
+    queryName = "foodReviews"
+    return {queryName: database.getReviewsForFoodItem(foodId)}
+
+@app.route("/getDiningHallSwipes/<diningHall>")
+def getDiningHallSwipes(diningHall):
+    queryName = "diningHallSwipes"
+    return {queryName: database.getReviewTimestampsForDiningHall(diningHall)}
 
 @app.route("/getDiningHallSignIns")
 def getDiningHallSignIns():
