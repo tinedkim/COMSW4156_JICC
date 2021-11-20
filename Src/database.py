@@ -10,7 +10,7 @@ from requests import get
 
 ip = get('https://api.ipify.org').content.decode('utf8')
 # For testing locally:
-ip = '34.74.179.106'
+ip='35.229.94.199'
 DATABASEURI = "postgresql://postgres:jicc@{0}/postgres".format(ip)
 
 engine = create_engine(DATABASEURI)

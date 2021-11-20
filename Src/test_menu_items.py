@@ -32,8 +32,7 @@ class Test_TestMenuItems(unittest.TestCase):
         assert "Whole Wheat Penne" in menus[1].keys()
         test_url = menus[1]["Whole Wheat Penne"]
         actual_url =\
-            'url(/sites/default/files/2019-06/\
-                whole_wheat_penne_cooked_and_uncooked.jpg)'
+            'url(/sites/default/files/2019-06/whole_wheat_penne_cooked_and_uncooked.jpg)'
         self.assertEqual(test_url, actual_url)
 
         # JJ's

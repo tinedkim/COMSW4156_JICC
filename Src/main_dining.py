@@ -14,7 +14,7 @@ def check_open_halls():
 
     content = client.general_request(dining_url).content
     soup = BeautifulSoup(content, features='html5lib')
-    print(soup.prettify())
+    #print(soup.prettify())
     open_halls = []
 
     dining_halls = soup.find('div', attrs={'class': 'col-xs-12 col-md-6'})
