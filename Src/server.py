@@ -11,7 +11,9 @@ from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from requests import get
 import database
-app = Flask(__name__)
+tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
+app = Flask(__name__, template_folder=tmpl_dir)
+app.static_folder = 'static'
 
 
 # get dining hall menu items
@@ -48,25 +50,24 @@ def getDiningHallSwipes(diningHall):
     queryName = "diningHallSwipes"
     return {queryName: database.getReviewTimestampsForDiningHall(diningHall)}
 
-
-# to implement later
-'''
 #home page
 @app.route("/")
 def landingPage():
     queryName = "CULFA"
-    return "CULFA"
+    return render_template("landing.html")
 
 # Login Page
 @app.route('/login')
 def login():
-    return "<p>Login here</p>"
+    return render_template("login.html")
 
 # Signup Page
 @app.route('/signup')
 def signup():
-    return "<p>Sign up here</p>"
+    return render_template("signup.html")
 
+# to implement later
+'''
 # check user credentials
 @app.route('/checkCredentials')
 def checkCredentials():
@@ -100,4 +101,4 @@ def getDiningHallSignIns():
 
 if __name__ == '__main__':
 
-    app.run(host="0.0.0.0", port=3000)
+    app.run(host="0.0.0.0", port=3000, debug=True)

@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>CULFA</title>
+    {% block styles %}
+    <link rel="stylesheet" href="static/style.css" />
+    {% endblock %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>CULFA</h1>
+      <div class="nav">
+        <a href="{{ url_for('signup') }}">Sign up</a>
+        <a href="{{ url_for('login') }}">Log in</a>
+      </div>
+    </header>
+    <main>{% block content %}{% endblock %}</main>
+    <footer></footer>
+  </body>
+</html>
