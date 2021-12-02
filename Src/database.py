@@ -68,3 +68,38 @@ def getReviewTimestampsForDiningHall(diningHall):
 
 def getFoodItems():
     return getRows(executeQuery('SELECT * from foodItem'))
+
+
+def checkCredentials(name, email):
+    return getRows(executeQuery('SELECT uni FROM\
+                                  person WHERE name = %s\
+                                  and email = %s', name, email))
+
+
+def createUser(name, uni, email):
+    try: 
+        executeQuery('INSERT INTO\
+                      person(name, uni, email)\
+                      VALUES(%s, %s, %s)', name, uni, email )
+        return 1
+    except:
+        return -1
+
+
+def getUserReviews(uni):
+    return getRows(executeQuery('SELECT text, rating\
+                                 FROM review where\
+                                 uni = %s', uni))
+
+def getUserReviewItem(uni):
+    return getRows(executeQuery('SELECT fooditemid\
+                                 FROM review where\
+                                 uni = %s', uni))
+
+def sendReview(uni, review, rating, foodItem):
+    try:
+        executeQuery('INSERT INTO review(text, rating, uni, fooditemid)\
+                      VALUES(%s, %s, %s, %s)', review, rating, uni, foodItem )
+        return 1
+    except:
+        return -1

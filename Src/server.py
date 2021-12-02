@@ -10,11 +10,70 @@ from json import dumps
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from requests import get
+from werkzeug.wrappers import CommonRequestDescriptorsMixin
 import database
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
 app = Flask(__name__, template_folder=tmpl_dir, static_folder=static_dir)
 
+
+# login Page
+@app.route('/login')
+def login():
+    return render_template("login.html")
+
+
+# signup Page
+@app.route('/signup')
+def signup():
+    return render_template("signup.html")
+
+'''
+# create user
+@app.route('/createuser', methods = ['POST'])
+def create_user():
+    name = request.form['name']
+    uni = request.form['uni']
+    email = request.form['email']
+    valid = database.createUser(name, uni, email)
+    if valid == -1:
+        return render_template("error.html")
+    url = '/' + uni
+    return redirect(url)
+
+
+# check user credentials
+@app.route('/checkCredentials', methods = ['POST'])
+def checkCredentials():
+    valid = -1
+    name = request.form['name']
+    uni = request.form['uni']
+    email = request.form['email']
+    valid = database.checkCredentials(name, uni, email)
+    if valid == -1:
+        return render_template("error.html")
+    url = '/' + uni
+    return redirect(url)
+
+
+# user profile
+@app.route('/<uni>')
+def profile(uni):
+    reviews = database.getUserReviews(uni)
+    foodIDs = database.getUserReviewItem(uni)
+    return render_template("profile.html", uni = uni, reviews = reviews, foodIDs = foodIDs)
+
+
+# add menu item review
+@app.route('/<uni>/addReview', methods = ['POST'])
+def addReview(uni):
+    review = request.form['review']
+    rating = request.form['rating']
+    foodItem = request.form['foodItem']
+    url = '/' + uni
+    database.sendReview(uni, review, rating, foodItem)
+    return redirect(url)
+'''
 
 # get dining hall menu items
 @app.route('/getDiningMenu/<diningHall>')
@@ -41,6 +100,7 @@ def getFoodItems():
 def getFoodReviews(foodId):
     return render_template("reviews.html", reviews = database.getReviewsForFoodItem(foodId))
 
+
 # get dining hall swipes
 @app.route("/getDiningHallSwipes/<diningHall>")
 def getDiningHallSwipes(diningHall):
@@ -48,31 +108,8 @@ def getDiningHallSwipes(diningHall):
     return {queryName: database.getReviewTimestampsForDiningHall(diningHall)}
 
 
-#home page
-@app.route("/")
-def landingPage():
-    queryName = "CULFA"
-    return render_template("landing.html", dininghalls = database.getDiningHalls())
-
-# Login Page
-@app.route('/login')
-def login():
-    return render_template("login.html")
-
-# Signup Page
-@app.route('/signup')
-def signup():
-    return render_template("signup.html")
-
 # to implement later
 '''
-
-# check user credentials
-@app.route('/checkCredentials')
-def checkCredentials():
-    queryName = "checkCredentials"
-    return {queryName: []}
-
 # get top menu items
 @app.route("/topMenuItems")
 def getTopMenuItems():
@@ -85,18 +122,17 @@ def getTopDiningHalls():
     queryName = "topDiningHalls"
     return {queryName: []}
 
-# get user history
-@app.route("/getUserHistory")
-def getUserHistory():
-    queryName = "getUserHistory"
-    return {queryName: []}
-
 # get dining hall sign ins
 @app.route("/getDiningHallSignIns")
 def getDiningHallSignIns():
     queryName = "diningHallSignIns"
     return {queryName: []}
 '''
+
+#home page
+@app.route("/")
+def landingPage():
+    return render_template("landing.html", dininghalls = database.getDiningHalls())
 
 if __name__ == '__main__':
 
