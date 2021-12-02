@@ -12,15 +12,14 @@ from sqlalchemy.pool import NullPool
 from requests import get
 import database
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
-app = Flask(__name__, template_folder=tmpl_dir)
-app.static_folder = 'static'
+static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
+app = Flask(__name__, template_folder=tmpl_dir, static_folder=static_dir)
 
 
 # get dining hall menu items
 @app.route('/getDiningMenu/<diningHall>')
 def getDiningMenuItems(diningHall):
-    queryName = "diningMenu"
-    return {queryName: database.getDiningHallMenuItems(diningHall)}
+    return render_template("dininghall.html", menu = database.getDiningHallMenuItems(diningHall))
 
 
 # get dining halls
@@ -40,9 +39,7 @@ def getFoodItems():
 # get food reviews
 @app.route("/getFoodReviews/<foodId>")
 def getFoodReviews(foodId):
-    queryName = "foodReviews"
-    return {queryName: database.getReviewsForFoodItem(foodId)}
-
+    return render_template("reviews.html", reviews = database.getReviewsForFoodItem(foodId))
 
 # get dining hall swipes
 @app.route("/getDiningHallSwipes/<diningHall>")
@@ -54,7 +51,7 @@ def getDiningHallSwipes(diningHall):
 @app.route("/")
 def landingPage():
     queryName = "CULFA"
-    return render_template("landing.html")
+    return render_template("landing.html", dininghalls = database.getDiningHalls())
 
 # Login Page
 @app.route('/login')
