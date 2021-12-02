@@ -1,6 +1,7 @@
 {% extends "layout.html" %} {% block content %}
-<div class="content">
-  <h4>Choose a dining hall</h4>
+
+<h4>Choose a dining hall</h4>
+<div class="landinggrid">
   {% for dhall in dininghalls %}
   <a href="{{ url_for('getDiningMenuItems', diningHall = dhall.id) }}">
     <div class="dhallcard">

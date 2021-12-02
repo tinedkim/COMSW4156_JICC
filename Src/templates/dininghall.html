@@ -1,14 +1,14 @@
 {% extends "layout.html" %}{% block content %}
-<div class="content">
+<div class="menugrid">
   {% for item in menu %}
   <a href="{{ url_for('getFoodReviews', foodId = item.fooditemid) }}">
     <div class="itemcard">
       <img
         src="https://dining.columbia.edu{{item.imageurl[4:-1]}}"
-        height="300"
-        width="300"
+        height="200"
+        width="200"
       />
-      <h3>{{item.foodname}}</h3>
+      <p class="foodname">{{item.foodname}}</p>
     </div>
   </a>
   {% endfor %}
