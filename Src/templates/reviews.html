@@ -1,5 +1,6 @@
 {% extends "layout.html" %} {% block content %}
-<div class="content">
+<div class="reviewgrid">
+    <h3>Reviews</h3>
   {% for review in reviews %}
   <div class="review">
     <h3>{{review.rating}} stars
