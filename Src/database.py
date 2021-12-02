@@ -19,7 +19,7 @@ engine = create_engine(DATABASEURI)
 def executeQuery(query, values=None, returnResults=True):
     with engine.connect() as connection:
         cursor = connection.execute(query) if values is None\
-            else connection.execute(query, values)
+            else connection.execute(query, *values)
         results = None
         if returnResults:
             results = cursor.fetchall()
@@ -47,7 +47,7 @@ def getRows(cur):
 
 def getDiningHallMenuItems(diningHall):
     return getRows(executeQuery('SELECT* FROM foodItem\
-                                 where diningHall = %s', diningHall))
+                                 where diningHall = %s', [diningHall]))
 
 
 def getDiningHalls():
@@ -56,14 +56,14 @@ def getDiningHalls():
 
 def getReviewsForFoodItem(foodItemId):
     return getRows(executeQuery('SELECT * FROM REVIEW\
-                                 where foodItemId = %s', foodItemId))
+                                 where foodItemId = %s', [foodItemId]))
 
 
 def getReviewTimestampsForDiningHall(diningHall):
     return getRows(executeQuery('SELECT date FROM REVIEW\
                                  inner join foodItem on\
                                  foodItem.foodItemID = review.foodItemId\
-                                 WHERE foodItem.diningHall = %s', diningHall))
+                                 WHERE foodItem.diningHall = %s', [diningHall]))
 
 
 def getFoodItems():
@@ -71,16 +71,19 @@ def getFoodItems():
 
 
 def checkCredentials(name, email):
-    return getRows(executeQuery('SELECT uni FROM\
+    try: 
+        return getRows(executeQuery('SELECT uni FROM\
                                   person WHERE name = %s\
-                                  and email = %s', name, email))
+                                  and email = %s', [name, email]))
+    except:
+        return -1
 
 
 def createUser(name, uni, email):
     try: 
         executeQuery('INSERT INTO\
                       person(name, uni, email)\
-                      VALUES(%s, %s, %s)', name, uni, email )
+                      VALUES(%s, %s, %s)', [name, uni, email] )
         return 1
     except:
         return -1
@@ -89,17 +92,17 @@ def createUser(name, uni, email):
 def getUserReviews(uni):
     return getRows(executeQuery('SELECT text, rating\
                                  FROM review where\
-                                 uni = %s', uni))
+                                 uni = %s', [uni]))
 
 def getUserReviewItem(uni):
     return getRows(executeQuery('SELECT fooditemid\
                                  FROM review where\
-                                 uni = %s', uni))
+                                 uni = %s', [uni]))
 
 def sendReview(uni, review, rating, foodItem):
     try:
         executeQuery('INSERT INTO review(text, rating, uni, fooditemid)\
-                      VALUES(%s, %s, %s, %s)', review, rating, uni, foodItem )
+                      VALUES(%s, %s, %s, %s)', [review, rating, uni, foodItem] )
         return 1
     except:
         return -1
