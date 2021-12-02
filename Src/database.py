@@ -72,8 +72,8 @@ def getFoodItems():
 
 def checkCredentials(name, email):
     return getRows(executeQuery('SELECT uni FROM\
-                                  person WHERE name = %s\
-                                  and email = %s', name, email))
+                                 person WHERE name = %s\
+                                 and email = %s', name, email))
 
 
 def createUser(name, uni, email):
@@ -91,7 +91,7 @@ def getUserReviews(uni):
                                  FROM review where\
                                  uni = %s', uni))
 
-def getUserReviewItem(uni):
+def getUserReviewItemid(uni):
     return getRows(executeQuery('SELECT fooditemid\
                                  FROM review where\
                                  uni = %s', uni))
