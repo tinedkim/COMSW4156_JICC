@@ -108,3 +108,13 @@ def sendReview(uni, review, rating, foodItem):
         return 1
     except:
         return -1
+
+
+def getTopMenuItems():
+    return getRows(executeQuery('SELECT foodname, avg(rating) as avg_rating\
+                                 FROM review inner join fooditem on\
+                                 fooditem.fooditemid = review.fooditemid\
+                                 GROUP by fooditem.fooditemid\
+                                 ORDER by avg_rating desc\
+                                 FETCH FIRST 10 ROWS ONLY'))
+

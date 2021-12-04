@@ -117,7 +117,7 @@ def getDiningHallSwipes(diningHall):
 @app.route("/topMenuItems")
 def getTopMenuItems():
     queryName = "topMenuItems"
-    return {queryName: []}
+    return {queryName: database.getTopMenuItems()}
 
 # get top dining halls
 @app.route("/topDiningHalls")
