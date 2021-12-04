@@ -60,7 +60,7 @@ def checkCredentials():
 @app.route('/<uni>')
 def profile(uni):
     reviews = database.getUserReviews(uni)
-    foodIDs = database.getUserReviewItem(uni)
+    foodIDs = database.getUserReviewItemid(uni)
     return render_template("profile.html", uni = uni, reviews = reviews, foodIDs = foodIDs)
 
 
@@ -70,8 +70,11 @@ def addReview(uni):
     review = request.form['review']
     rating = request.form['rating']
     foodItem = request.form['foodItem']
+    valid = -1
+    valid = database.sendReview(uni, review, rating, foodItem)
+    if valid == -1:
+        return render_template("error.html")
     url = '/' + uni
-    database.sendReview(uni, review, rating, foodItem)
     return redirect(url)
 '''
 
@@ -114,7 +117,7 @@ def getDiningHallSwipes(diningHall):
 @app.route("/topMenuItems")
 def getTopMenuItems():
     queryName = "topMenuItems"
-    return {queryName: []}
+    return {queryName: database.getTopMenuItems()}
 
 # get top dining halls
 @app.route("/topDiningHalls")
