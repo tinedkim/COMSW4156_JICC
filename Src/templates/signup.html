@@ -1,7 +1,13 @@
 {% extends "layout.html" %} {% block content %}
-<form method="POST" class="signup">
+<form method="POST" class="signup" action="/createuser">
   <div style="margin-right: 15px">Name: <input type="text" name="name" /></div>
   <div style="margin-right: 15px">Uni: <input type="text" name="uni" /></div>
+  <div style="margin-right: 15px">
+    Email: <input type="text" name="email" />
+  </div>
+  {% if valid == False %}
+  <p>Invalid inputs. Please try again</p>
+  {% endif %}
   <button id="loginbutton">Sign Up</button>
 </form>
 {% endblock %}

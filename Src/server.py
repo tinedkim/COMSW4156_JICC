@@ -28,16 +28,17 @@ def login():
 def signup():
     return render_template("signup.html")
 
-'''
+
 # create user
 @app.route('/createuser', methods = ['POST'])
 def create_user():
     name = request.form['name']
     uni = request.form['uni']
     email = request.form['email']
+    print(name, uni, email)
     valid = database.createUser(name, uni, email)
     if valid == -1:
-        return render_template("error.html")
+        return render_template("signup.html", valid = False)
     url = '/' + uni
     return redirect(url)
 
@@ -47,15 +48,14 @@ def create_user():
 def checkCredentials():
     valid = -1
     name = request.form['name']
-    uni = request.form['uni']
     email = request.form['email']
-    valid = database.checkCredentials(name, uni, email)
+    valid = database.checkCredentials(name, email)
     if valid == -1:
-        return render_template("error.html")
-    url = '/' + uni
+        return render_template("login.html", valid = False)
+    url = '/' + valid[0]['uni']
     return redirect(url)
 
-
+'''
 # user profile
 @app.route('/<uni>')
 def profile(uni):
@@ -101,7 +101,7 @@ def getFoodItems():
 # get food reviews
 @app.route("/getFoodReviews/<foodId>")
 def getFoodReviews(foodId):
-    return render_template("reviews.html", reviews = database.getReviewsForFoodItem(foodId))
+    return render_template("reviews.html", reviews = database.getReviewsForFoodItem(foodId), food = foodId)
 
 
 # get dining hall swipes
@@ -139,4 +139,4 @@ def landingPage():
 
 if __name__ == '__main__':
 
-    app.run(host="0.0.0.0", port=3000)
+    app.run(host="0.0.0.0", port=3000, debug=True)
