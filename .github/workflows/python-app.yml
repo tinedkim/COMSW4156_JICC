@@ -23,6 +23,7 @@ jobs:
         # Provide the password for postgres
         env:
           POSTGRES_PASSWORD: jicc
+          ip: postgres
     
     steps:
     - uses: actions/checkout@v2
