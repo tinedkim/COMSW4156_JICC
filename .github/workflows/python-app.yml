@@ -23,8 +23,10 @@ jobs:
         # Provide the password for postgres
         env:
           POSTGRES_PASSWORD: jicc
-          ip: postgres
-    
+          POSTGRES_DB: postgres
+          POSTGRES_USER: postgres
+        ports:
+          - 5432:5432 
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.10
