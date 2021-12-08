@@ -19,12 +19,14 @@ engine = create_engine(DATABASEURI)
 
 def execute_query(query, values = None, returnResults = True):
     with engine.connect() as connection:
-        cursor = connection.execute(query) if values is None else connection.execute(query, values)
+        cursor = connection.execute(query) if values is None\
+            else connection.execute(query, *values)
         results = None
         if returnResults:
             results = cursor.fetchall()
         connection.close()
         return results
+
 
 def populate_menu_items():
     menus = scrape_all()
@@ -33,10 +35,12 @@ def populate_menu_items():
         for i in range(1, 4):
             dining_hall = menus[i-1]
             for key, val in dining_hall.items():
-                connection.execute("INSERT INTO fooditem(foodName, imageURL, diningHall) \
-                                    VALUES (%s, %s, %s) \
-                                    ON CONFLICT (foodName) DO NOTHING", 
-                                    key, val, i)
+                connection.execute("INSERT INTO fooditem\
+                                    (foodName, imageURL, diningHall)\
+                                    VALUES (%s, %s, %s)\
+                                    ON CONFLICT (foodName) DO NOTHING",
+                                   key, val, i)
+
 
 def get_rows(cur):
     return [dict(result) for result in cur]
@@ -55,3 +59,56 @@ def get_review_timestamps_for_dining_hall(diningHall):
 
 def get_food_items():
     return get_rows(execute_query('SELECT * from foodItem'))
+
+def getFoodItems():
+    return getRows(executeQuery('SELECT * from foodItem'))
+
+
+def checkCredentials(name, email):
+    try: 
+        return getRows(executeQuery('SELECT uni FROM\
+                                  person WHERE name = %s\
+                                  and email = %s', [name, email]))
+    except:
+        return -1
+
+
+def createUser(name, uni, email):
+    try: 
+        executeQuery('INSERT INTO\
+                      person(name, uni, email)\
+                      VALUES(%s, %s, %s)', [name, uni, email] )
+        return 1
+    except:
+        return -1
+
+
+def getUserReviews(uni):
+    return getRows(executeQuery('SELECT text, rating\
+                                 FROM review where\
+                                 uni = %s', [uni]))
+
+
+def getUserReviewItemid(uni):
+    return getRows(executeQuery('SELECT fooditemid\
+                                 FROM review where\
+                                 uni = %s', [uni]))
+
+
+def sendReview(uni, review, rating, foodItem):
+    try:
+        executeQuery('INSERT INTO review(text, rating, uni, fooditemid)\
+                      VALUES(%s, %s, %s, %s)', [review, rating, uni, foodItem] )
+        return 1
+    except:
+        return -1
+
+
+def getTopMenuItems():
+    return getRows(executeQuery('SELECT foodname, avg(rating) as avg_rating\
+                                 FROM review inner join fooditem on\
+                                 fooditem.fooditemid = review.fooditemid\
+                                 GROUP by fooditem.fooditemid\
+                                 ORDER by avg_rating desc\
+                                 FETCH FIRST 10 ROWS ONLY'))
+

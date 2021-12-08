@@ -13,8 +13,10 @@ class Test_TestDatabase(unittest.TestCase):
             cursor = connection.execute("SELECT D.id FROM diningHall D")
             for hall in cursor:
                 id = hall[0]
-                item_counts = connection.execute("SELECT COUNT(*) FROM foodItem F\
-                                            WHERE F.diningHall = {0}".format(id))
+                item_counts = connection.execute("SELECT COUNT(*)\
+                                                  FROM foodItem F\
+                                                  WHERE F.diningHall\
+                                                  = {0}".format(id))
                 for count in item_counts:
                     num_entry = count[0]
                     print(num_entry, "for id: ", id)
