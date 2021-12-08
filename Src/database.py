@@ -8,14 +8,16 @@ from sqlalchemy import *
 from menu_items import scrape_all
 from requests import get
 
+load_dotenv("./env")
+
 ip = get('https://api.ipify.org').content.decode('utf8')
 # For testing locally:
-ip = '34.74.179.106'
+ip = os.environ.get("ip")
 DATABASEURI = "postgresql://postgres:jicc@{0}/postgres".format(ip)
 
 engine = create_engine(DATABASEURI)
 
-def executeQuery(query, values = None, returnResults = True):
+def execute_query(query, values = None, returnResults = True):
     with engine.connect() as connection:
         cursor = connection.execute(query) if values is None else connection.execute(query, values)
         results = None
@@ -36,21 +38,20 @@ def populate_menu_items():
                                     ON CONFLICT (foodName) DO NOTHING", 
                                     key, val, i)
 
-def getRows(cur):
+def get_rows(cur):
     return [dict(result) for result in cur]
 
-def getDiningHallMenuItems(diningHall):
-    return getRows(executeQuery('SELECT* FROM foodItem where diningHall = %s', diningHall))
+def get_dining_hall_menu_items(diningHall):
+    return get_rows(execute_query('SELECT* FROM foodItem where diningHall = %s', diningHall))
     
-    
-def getDiningHalls():
-    return getRows(executeQuery('SELECT * FROM diningHall'))
+def get_dining_halls():
+    return get_rows(execute_query('SELECT * FROM diningHall'))
 
-def getReviewsForFoodItem(foodItemId):
-    return getRows(executeQuery('SELECT * FROM REVIEW where foodItemId = %s', foodItemId))
+def get_reviews_for_food_item(foodItemId):
+    return get_rows(execute_query('SELECT * FROM REVIEW where foodItemId = %s', foodItemId))
 
-def getReviewTimestampsForDiningHall(diningHall):
-    return getRows(executeQuery('SELECT date FROM REVIEW inner join foodItem on foodItem.foodItemID = review.foodItemId WHERE foodItem.diningHall = %s', diningHall))
+def get_review_timestamps_for_dining_hall(diningHall):
+    return get_rows(execute_query('SELECT date FROM REVIEW inner join foodItem on foodItem.foodItemID = review.foodItemId WHERE foodItem.diningHall = %s', diningHall))
 
-def getFoodItems():
-    return getRows(executeQuery('SELECT * from foodItem'))
+def get_food_items():
+    return get_rows(execute_query('SELECT * from foodItem'))
