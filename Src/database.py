@@ -12,7 +12,7 @@ load_dotenv("./env")
 
 ip = get('https://api.ipify.org').content.decode('utf8')
 # For testing locally:
-ip = os.environ.get("ip")
+ip = os.environ.get("ip") or "localhost"
 DATABASEURI = "postgresql://postgres:jicc@{0}/postgres".format(ip)
 
 engine = create_engine(DATABASEURI)
