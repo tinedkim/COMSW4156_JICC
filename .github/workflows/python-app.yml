@@ -41,7 +41,7 @@ jobs:
     - name: Install PostgreSQL Client
       run: |
         apt-get update
-        apt-get install --yes postgresql-client
+        sudo apt-get install --yes postgresql-client
     - name: Setup Tables
       run: |
         psql -U postgres -d postgres -f psql.sql
