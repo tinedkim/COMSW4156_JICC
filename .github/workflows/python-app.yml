@@ -13,7 +13,17 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    
+    # Service containers to run with container-job
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_PASSWORD: jicc
+    
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.10
