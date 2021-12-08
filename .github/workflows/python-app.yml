@@ -45,7 +45,7 @@ jobs:
     - name: Setup Tables
       run: |
         psql -U postgres -d postgres -f psql.sql
-      env: |
+      env: 
         PGPASSWORD: jicc
     - name: Lint with flake8
       run: |
