@@ -44,7 +44,7 @@ jobs:
         sudo apt-get install --yes postgresql-client
     - name: Setup Tables
       run: |
-        psql -U postgres -d postgres -f psql.sql
+        psql -h localhost -U postgres -d postgres -f psql.sql
       env: 
         PGPASSWORD: jicc
     - name: Lint with flake8
