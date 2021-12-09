@@ -35,7 +35,7 @@ def populate_menu_items(testing=False):
         for i in range(1, 4):
             dining_hall = menus[i-1]
             for key, val in dining_hall.items():
-                print(f'insert {key} {value} for {i}') 
+                print(f'insert {key} {val} for {i}') 
                 connection.execute("INSERT INTO fooditem\
                                     (foodName, imageURL, diningHall)\
                                     VALUES (%s, %s, %s)\
