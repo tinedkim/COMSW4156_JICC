@@ -31,9 +31,11 @@ CREATE TABLE Review (
 	Primary key (reviewID)
 );
 
-insert into diningHall (name) values ("Ferris");
-insert into diningHall (name) values ("John Jay");
-insert into diningHall (name) values ("JJs");
+insert into diningHall (name) values ('Ferris');
+insert into diningHall (name) values ('John Jay');
+insert into diningHall (name) values ('JJs');
+
+insert into person(name, uni, email) values ('Ivan Chau', 'ic2504', 'ic2504@columbia.edu');
 
 
 

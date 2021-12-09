@@ -28,8 +28,8 @@ def execute_query(query, values = None, returnResults = True):
         return results
 
 
-def populate_menu_items():
-    menus = scrape_all()
+def populate_menu_items(testing=False):
+    menus = scrape_all(testing)
     print('scraping completed')
     with engine.connect() as connection:
         for i in range(1, 4):

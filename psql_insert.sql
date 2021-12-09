@@ -1,1 +1,1 @@
-insert into person(name, uni, email) values ("Ivan Chau", "ic2504", "ic2504@columbia.edu");
+INSERT into review(text, rating, uni, fooditemid) VALUES('Absolutely amazing!', '5', 'ic2504', '3');
