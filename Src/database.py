@@ -46,16 +46,16 @@ def get_rows(cur):
     return [dict(result) for result in cur]
 
 def get_dining_hall_menu_items(diningHall):
-    return get_rows(execute_query('SELECT* FROM foodItem where diningHall = %s', diningHall))
+    return get_rows(execute_query('SELECT* FROM foodItem where diningHall = %s', [diningHall]))
     
 def get_dining_halls():
     return get_rows(execute_query('SELECT * FROM diningHall'))
 
 def get_reviews_for_food_item(foodItemId):
-    return get_rows(execute_query('SELECT * FROM REVIEW where foodItemId = %s', foodItemId))
+    return get_rows(execute_query('SELECT * FROM REVIEW where foodItemId = %s', [foodItemId]))
 
 def get_review_timestamps_for_dining_hall(diningHall):
-    return get_rows(execute_query('SELECT date FROM REVIEW inner join foodItem on foodItem.foodItemID = review.foodItemId WHERE foodItem.diningHall = %s', diningHall))
+    return get_rows(execute_query('SELECT date FROM REVIEW inner join foodItem on foodItem.foodItemID = review.foodItemId WHERE foodItem.diningHall = %s', [diningHall]))
 
 def get_food_items():
     return get_rows(execute_query('SELECT * from foodItem'))
