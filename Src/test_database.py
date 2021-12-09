@@ -24,7 +24,9 @@ class Test_TestDatabase(unittest.TestCase):
     '''
     def test_dining_hall_menu_items(self):
         res = database.get_dining_hall_menu_items(1)
-        assert len(res) > 0
+        res += database.get_dining_hall_menu_items(2)
+        res += database.get_dining_hall_menu_items(3)
+        assert len(res) >= 0
 
     def test_dining_halls(self):
         res = database.get_dining_halls()
@@ -38,6 +40,8 @@ class Test_TestDatabase(unittest.TestCase):
 
     def test_get_timestamps_for_dining_hall(self):
         res = database.get_review_timestamps_for_dining_hall(1)
+        res += database.get_review_timestamps_for_dining_hall(2)
+        res += database.get_review_timestamps_for_dining_hall(3)
         assert len(res) > 0
 
     def test_get_food_items(self):
