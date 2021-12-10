@@ -54,3 +54,5 @@ python3 -m unittest
 Our CI reports are located in Github Actions: https://github.com/tinedkim/COMSW4156_JICC/actions/workflows/python-app.yml
 
 The CI reports include coverage reports, style checker reports, and bug finder reports.
+
+SonarCloud report: https://sonarcloud.io/summary/overall?id=tinedkim_COMSW4156_JICC
