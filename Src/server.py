@@ -2,18 +2,15 @@
 Begin server at 3000 and expose endpoints
 '''
 import os
-import random
-import time
-
+import database
 from flask import Flask, render_template, request, redirect, jsonify
 from json import dumps
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from requests import get
 from werkzeug.wrappers import CommonRequestDescriptorsMixin
-import database
 from flask_wtf.csrf import CSRFProtect
-
+from datetime import date, datetime
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
@@ -70,16 +67,22 @@ def profile(uni):
 # add menu item review
 @app.route('/<uni>/addReview', methods = ['POST'])
 def addReview(uni):
+    today = date.today()
+    now = datetime.now()
     review = request.form['review']
     rating = request.form['rating']
     foodItem = request.form['foodItem']
+    date = today.strftime("%B %d, %Y")
+    time = now.strftime("%H:%M:%S")
+    datetime = date +" " + time
     valid = -1
-    valid = database.sendReview(uni, review, rating, foodItem)
+    valid = database.sendReview(uni, review, rating, foodItem, datetime)
     if valid == -1:
         return render_template("error.html")
     url = '/' + uni
     return redirect(url)
 '''
+
 
 # get dining hall menu items
 @app.route('/getDiningMenu/<diningHall>')
@@ -144,26 +147,26 @@ def get_dining_hall_swipes(diningHall):
     queryName = "diningHallSwipes"
     return {queryName: database.get_review_timestamps_for_dining_hall(diningHall)}
 
-# to implement later
-'''
 # get top menu items
 @app.route("/topMenuItems")
 def getTopMenuItems():
     queryName = "topMenuItems"
     return {queryName: database.getTopMenuItems()}
 
+
 # get top dining halls
 @app.route("/topDiningHalls")
 def getTopDiningHalls():
     queryName = "topDiningHalls"
-    return {queryName: []}
+    return {queryName: database.getTopDiningHalls()}
+
 
 # get dining hall sign ins
 @app.route("/getDiningHallSignIns")
 def get_dining_hall_sign_ins():
     queryName = "diningHallSignIns"
-    return {queryName: []}
-'''
+    return {queryName: database.getDiningHallSignIns()}
+
 
 #home page
 @app.route("/")
