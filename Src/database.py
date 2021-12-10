@@ -118,6 +118,7 @@ def getTopMenuItems():
                                  ORDER by avg_rating desc\
                                  FETCH FIRST 10 ROWS ONLY'))
 
+
 def getTopDiningHalls():
     return getRows(executeQuery('SELECT name, avg(rating) as avg_rating\
                                  FROM review left join fooditem\

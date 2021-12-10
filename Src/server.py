@@ -64,6 +64,7 @@ def profile(uni):
     foodIDs = database.getUserReviewItemid(uni)
     return render_template("profile.html", uni = uni, reviews = reviews, foodIDs = foodIDs)
 
+
 # add menu item review
 @app.route('/<uni>/addReview', methods = ['GET', 'POST'])
 def addReview(uni):
