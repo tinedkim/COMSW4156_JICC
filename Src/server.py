@@ -2,16 +2,15 @@
 Begin server at 3000 and expose endpoints
 '''
 import os
-import random
-import time
-
+import database
 from flask import Flask, render_template, request, redirect, jsonify
 from json import dumps
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from requests import get
 from werkzeug.wrappers import CommonRequestDescriptorsMixin
-import database
+from datetime import date, datetime
+
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
 app = Flask(__name__, template_folder=tmpl_dir, static_folder=static_dir)
@@ -67,11 +66,16 @@ def profile(uni):
 # add menu item review
 @app.route('/<uni>/addReview', methods = ['POST'])
 def addReview(uni):
+    today = date.today()
+    now = datetime.now()
     review = request.form['review']
     rating = request.form['rating']
     foodItem = request.form['foodItem']
+    date = today.strftime("%B %d, %Y")
+    time = now.strftime("%H:%M:%S")
+    datetime = date +" " + time
     valid = -1
-    valid = database.sendReview(uni, review, rating, foodItem)
+    valid = database.sendReview(uni, review, rating, foodItem, datetime)
     if valid == -1:
         return render_template("error.html")
     url = '/' + uni

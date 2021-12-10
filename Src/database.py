@@ -101,10 +101,10 @@ def getUserReviewItemid(uni):
                                  uni = %s', [uni]))
 
 
-def sendReview(uni, review, rating, foodItem):
+def sendReview(uni, review, rating, foodItem, date):
     try:
-        executeQuery('INSERT INTO review(text, rating, uni, fooditemid)\
-                      VALUES(%s, %s, %s, %s)', [review, rating, uni, foodItem] )
+        executeQuery('INSERT INTO review(text, rating, uni, fooditemid, date)\
+                      VALUES(%s, %s, %s, %s, %s)', [review, rating, uni, foodItem, date] )
         return 1
     except:
         return -1
