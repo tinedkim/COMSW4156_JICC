@@ -64,22 +64,25 @@ def profile(uni):
     foodIDs = database.getUserReviewItemid(uni)
     return render_template("profile.html", uni = uni, reviews = reviews, foodIDs = foodIDs)
 
-
 # add menu item review
-@app.route('/<uni>/addReview', methods = ['POST'])
+@app.route('/<uni>/addReview', methods = ['GET', 'POST'])
 def addReview(uni):
-    review = request.form['review']
-    rating = request.form['rating']
-    foodItem = request.form['foodItem']
-    date = today.strftime("%B %d, %Y")
-    time = now.strftime("%H:%M:%S")
-    datetime = date +" " + time
-    valid = -1
-    valid = database.sendReview(uni, review, rating, foodItem, datetime)
-    if valid == -1:
-        return render_template("error.html")
-    url = '/' + uni
-    return redirect(url)
+    if request.method == 'POST':
+        review = request.form['review']
+        rating = request.form['rating']
+        foodItem = request.form['foodItem']
+        date = today.strftime("%B %d, %Y")
+        time = now.strftime("%H:%M:%S")
+        datetime = date + " " + time
+        valid = -1
+        valid = database.sendReview(uni, review, rating, foodItem, datetime)
+        if valid == -1:
+            return render_template("error.html")
+        url = '/' + uni
+        return redirect(url)
+    else:
+        foodItems = database.getFoodItems()
+        return render_template("addReview.html", uni = uni, foodItems = foodItems)
 
 
 # get dining hall menu items

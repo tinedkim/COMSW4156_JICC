@@ -1,0 +1,5 @@
+{% extends "layout.html" %} {% block content %} Hello {{uni}}
+
+<a href="{{ url_for('addReview', uni = uni) }}">Add review</a>
+
+{% endblock %}
