@@ -78,6 +78,7 @@ def addReview(uni):
     return redirect(url)
 '''
 
+
 # get dining hall menu items
 @app.route('/getDiningMenu/<diningHall>')
 def getDiningMenuItems(diningHall):
@@ -111,26 +112,26 @@ def getDiningHallSwipes(diningHall):
     return {queryName: database.getReviewTimestampsForDiningHall(diningHall)}
 
 
-# to implement later
-'''
 # get top menu items
 @app.route("/topMenuItems")
 def getTopMenuItems():
     queryName = "topMenuItems"
     return {queryName: database.getTopMenuItems()}
 
+
 # get top dining halls
 @app.route("/topDiningHalls")
 def getTopDiningHalls():
     queryName = "topDiningHalls"
-    return {queryName: []}
+    return {queryName: database.getTopDiningHalls()}
+
 
 # get dining hall sign ins
 @app.route("/getDiningHallSignIns")
 def getDiningHallSignIns():
     queryName = "diningHallSignIns"
-    return {queryName: []}
-'''
+    return {queryName: database.getDiningHallSignIns()}
+
 
 #home page
 @app.route("/")
