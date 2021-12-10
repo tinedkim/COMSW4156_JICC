@@ -38,9 +38,21 @@ main {
 
 .landinggrid {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.dhallcard {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 1rem;
+  width: 250px;
+  padding: 25px;
+  margin: 30 30 30 30;
+  box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
 }
 
 /* Dininghall */

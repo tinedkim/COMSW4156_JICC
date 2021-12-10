@@ -141,7 +141,11 @@ def getDiningHallSignIns():
 #home page
 @app.route("/")
 def landingPage():
-    return render_template("landing.html", dininghalls = database.getDiningHalls())
+    dininghallstats = database.getTopDiningHalls()
+    menuitemstats = database.getTopMenuItems()
+    print(menuitemstats)
+    return render_template("landing.html", dininghalls = database.getDiningHalls(),
+                           dininghallstats = dininghallstats, menuitemstats = menuitemstats)
 
 if __name__ == '__main__':
 
