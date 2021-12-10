@@ -1,12 +1,12 @@
 import unittest
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from main_dining import check_open_halls
 
 
 class Test_TestMainDining(unittest.TestCase):
     def test_john_jay_open(self):
-        now = datetime.now()
+        now = datetime.now() + timedelta(hours=5)
 
         current_time = now.strftime('%H:%M:%S')
         day_of_week = now.weekday()
@@ -18,7 +18,7 @@ class Test_TestMainDining(unittest.TestCase):
                 assert 'John Jay Dining Hall' in dining_halls
 
     def test_ferris_open(self):
-        now = datetime.now()
+        now = datetime.now() + timedelta(hours=5)
 
         current_time = now.strftime('%H:%M:%S')
         day_of_week = now.weekday()
@@ -32,7 +32,7 @@ class Test_TestMainDining(unittest.TestCase):
                 assert 'Ferris Booth Commons' in dining_halls
 
     def test_jjs_open(self):
-        now = datetime.now()
+        now = datetime.now() + timedelta(hours=5)
 
         current_time = now.strftime('%H:%M:%S')
         day_of_week = now.weekday()
