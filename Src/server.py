@@ -15,6 +15,8 @@ tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
 app = Flask(__name__, template_folder=tmpl_dir, static_folder=static_dir)
 
+today = date.today()
+now = datetime.now()
 
 # login Page
 @app.route('/login')
@@ -54,7 +56,7 @@ def checkCredentials():
     url = '/' + valid[0]['uni']
     return redirect(url)
 
-'''
+
 # user profile
 @app.route('/<uni>')
 def profile(uni):
@@ -66,8 +68,6 @@ def profile(uni):
 # add menu item review
 @app.route('/<uni>/addReview', methods = ['POST'])
 def addReview(uni):
-    today = date.today()
-    now = datetime.now()
     review = request.form['review']
     rating = request.form['rating']
     foodItem = request.form['foodItem']
@@ -80,7 +80,6 @@ def addReview(uni):
         return render_template("error.html")
     url = '/' + uni
     return redirect(url)
-'''
 
 
 # get dining hall menu items
