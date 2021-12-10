@@ -118,7 +118,7 @@ def getFoodReviews(foodId):
 def getDiningHallSwipes(diningHall):
     queryName = "diningHallSwipes"
     return {queryName: database.getReviewTimestampsForDiningHall(diningHall)}
-
+    
 
 # get top menu items
 @app.route("/topMenuItems")
