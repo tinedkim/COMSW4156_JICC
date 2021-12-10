@@ -18,6 +18,7 @@ app = Flask(__name__, template_folder=tmpl_dir, static_folder=static_dir)
 today = date.today()
 now = datetime.now()
 
+
 # login Page
 @app.route('/login')
 def login():
