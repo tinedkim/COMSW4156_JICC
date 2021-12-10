@@ -35,7 +35,10 @@ jobs:
         # Provide the password for postgres
         env:
           POSTGRES_PASSWORD: jicc
-    
+          POSTGRES_DB: postgres
+          POSTGRES_USER: postgres
+        ports:
+          - 5432:5432 
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.10
@@ -47,6 +50,18 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Install PostgreSQL Client
+      run: |
+        sudo apt-get update
+        sudo apt-get install --yes postgresql-client
+    - name: Setup Tables
+      working-directory: ./Src
+      run: |
+        psql -h localhost -U postgres -d postgres -f ../psql.sql
+        python3 cold_start_database.py
+        psql -h localhost -U postgres -d postgres -f ../psql_insert.sql 
+      env: 
+        PGPASSWORD: jicc
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
@@ -55,6 +70,8 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Testing
       working-directory: ./Src
+      env: 
+        ip: localhost 
       run: |
         coverage run -m unittest discover
         coverage report -m
