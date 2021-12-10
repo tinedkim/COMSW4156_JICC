@@ -12,22 +12,14 @@ from sqlalchemy.pool import NullPool
 from requests import get
 from werkzeug.wrappers import CommonRequestDescriptorsMixin
 import database
-<<<<<<< HEAD
-
-=======
-app = Flask(__name__)
-
-import os
-import random
-import time
 from flask_wtf.csrf import CSRFProtect
 
-csrf = CSRFProtect(app)
->>>>>>> 4245be7e361f897cbf211040c8a8fadec5cf2657
+
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
 app = Flask(__name__, template_folder=tmpl_dir, static_folder=static_dir)
 
+csrf = CSRFProtect(app)
 
 # login Page
 @app.route('/login')
@@ -91,15 +83,9 @@ def addReview(uni):
 
 # get dining hall menu items
 @app.route('/getDiningMenu/<diningHall>')
-<<<<<<< HEAD
-def getDiningMenuItems(diningHall):
-    return render_template("dininghall.html", menu = database.getDiningHallMenuItems(diningHall))
-
-=======
 def get_dining_menu_items(diningHall):
     items = database.get_dining_hall_menu_items(diningHall)
     return {"diningMenu":items} 
->>>>>>> 4245be7e361f897cbf211040c8a8fadec5cf2657
 
 # get dining halls
 @app.route('/getDiningHalls')
@@ -158,10 +144,6 @@ def get_dining_hall_swipes(diningHall):
     queryName = "diningHallSwipes"
     return {queryName: database.get_review_timestamps_for_dining_hall(diningHall)}
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 4245be7e361f897cbf211040c8a8fadec5cf2657
 # to implement later
 '''
 # get top menu items
@@ -186,12 +168,7 @@ def get_dining_hall_sign_ins():
 #home page
 @app.route("/")
 def landingPage():
-<<<<<<< HEAD
-    return render_template("landing.html", dininghalls = database.getDiningHalls())
-
-=======
     return render_template("landing.html", dininghalls = database.get_dining_halls())
->>>>>>> 4245be7e361f897cbf211040c8a8fadec5cf2657
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=3000, debug=True)
