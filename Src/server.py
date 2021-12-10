@@ -2,6 +2,8 @@
 Begin server at 3000 and expose endpoints
 '''
 import os
+
+from sqlalchemy.sql.functions import user
 import database
 from flask import Flask, render_template, request, redirect, jsonify
 from json import dumps
@@ -62,7 +64,11 @@ def checkCredentials():
 def profile(uni):
     reviews = database.getUserReviews(uni)
     foodIDs = database.getUserReviewItemid(uni)
-    return render_template("profile.html", uni = uni, reviews = reviews, foodIDs = foodIDs)
+    userreviews = []
+    for review, id in zip(reviews, foodIDs):
+        userreviews.append({**review, **id})
+    print(userreviews)
+    return render_template("profile.html", uni = uni, userreviews = userreviews)
 
 
 # add menu item review
@@ -145,7 +151,6 @@ def getDiningHallSignIns():
 def landingPage():
     dininghallstats = database.getTopDiningHalls()
     menuitemstats = database.getTopMenuItems()
-    print(menuitemstats)
     return render_template("landing.html", dininghalls = database.getDiningHalls(),
                            dininghallstats = dininghallstats, menuitemstats = menuitemstats)
 
