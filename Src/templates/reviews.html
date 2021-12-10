@@ -1,0 +1,12 @@
+{% extends "layout.html" %} {% block content %}
+<div class="reviewgrid">
+    <h3>Reviews</h3>
+  {% for review in reviews %}
+  <div class="review">
+    <h3>{{review.rating}} stars
+    <p>{{review.text}}</p>
+    <h5>Written by {{review.uni}} on {{review.date}}</h5>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

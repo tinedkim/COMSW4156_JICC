@@ -1,0 +1,16 @@
+{% extends "layout.html" %}{% block content %}
+<div class="menugrid">
+  {% for item in menu %}
+  <a href="{{ url_for('getFoodReviews', foodId = item.fooditemid) }}">
+    <div class="itemcard">
+      <img
+        src="https://dining.columbia.edu{{item.imageurl[4:-1]}}"
+        height="200"
+        width="200"
+      />
+      <p class="foodname">{{item.foodname}}</p>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}

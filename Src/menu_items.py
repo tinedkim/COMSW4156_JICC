@@ -12,9 +12,11 @@ ferris_url = 'https://dining.columbia.edu/content/ferris-booth-commons-0'
 john_jay_url = 'https://dining.columbia.edu/content/john-jay-dining-hall'
 jjs_url = 'https://dining.columbia.edu/content/jjs-place-0'
 
-def get_content(idx, testing = False):
+
+def get_content(idx, testing=False):
     urls = [ferris_url, john_jay_url, jjs_url]
-    html = ['../testing/ferris.html', '../testing/johnjay.html', '../testing/jjs.html']
+    html = ['../testing/ferris.html', '../testing/johnjay.html',
+            '../testing/jjs.html']
 
     if testing:
         html_file = open(html[idx], "r")
@@ -26,7 +28,7 @@ def get_content(idx, testing = False):
     return content
 
 
-def scrape_all(testing = False):
+def scrape_all(testing=False):
     menus = [{}, {}, {}]
 
     # Each dining hall has a menu dictionary associating food item to image url

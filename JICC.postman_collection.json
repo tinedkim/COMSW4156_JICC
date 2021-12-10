@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "210fec6b-f0be-4f4f-bd62-22191874432f",
+		"name": "JICC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://34.74.179.106:3000/getDiningMenu/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://34.74.179.106:3000/getDiningMenu/1",
+					"protocol": "http",
+					"host": [
+						"34",
+						"74",
+						"179",
+						"106"
+					],
+					"port": "3000",
+					"path": [
+						"getDiningMenu",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://34.74.179.106:3000/getDiningHalls",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://34.74.179.106:3000/getDiningHalls",
+					"protocol": "http",
+					"host": [
+						"34",
+						"74",
+						"179",
+						"106"
+					],
+					"port": "3000",
+					"path": [
+						"getDiningHalls"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://34.74.179.106:3000/getFoodReviews/2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://34.74.179.106:3000/getFoodReviews/2",
+					"protocol": "http",
+					"host": [
+						"34",
+						"74",
+						"179",
+						"106"
+					],
+					"port": "3000",
+					"path": [
+						"getFoodReviews",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://34.74.179.106:3000/getDiningHallSwipes/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://34.74.179.106:3000/getDiningHallSwipes/1",
+					"protocol": "http",
+					"host": [
+						"34",
+						"74",
+						"179",
+						"106"
+					],
+					"port": "3000",
+					"path": [
+						"getDiningHallSwipes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://34.74.179.106:3000/getFoodItems",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://34.74.179.106:3000/getFoodItems",
+					"protocol": "http",
+					"host": [
+						"34",
+						"74",
+						"179",
+						"106"
+					],
+					"port": "3000",
+					"path": [
+						"getFoodItems"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
