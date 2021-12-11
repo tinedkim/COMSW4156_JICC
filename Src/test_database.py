@@ -26,7 +26,7 @@ class Test_TestDatabase(unittest.TestCase):
         res = database.get_dining_hall_menu_items(1)
         res += database.get_dining_hall_menu_items(2)
         res += database.get_dining_hall_menu_items(3)
-        assert len(res) >= 0
+        assert len(res) > 0
 
     def test_dining_halls(self):
         res = database.get_dining_halls()

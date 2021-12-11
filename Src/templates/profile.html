@@ -1,0 +1,25 @@
+{% extends "layout.html" %} {% block content %} Hello {{uni}}
+
+<a href="{{ url_for('addReview', uni = uni) }}">Add review</a>
+
+<div class="reviewgrid">
+  <h3>Reviews You Submitted</h3>
+  {% for review in userreviews %}
+  <div class="review">
+    <div>
+      <img
+        src="https://dining.columbia.edu{{review.imageurl[4:-1]}}"
+        height="100"
+        width="100"
+      />
+      <p>{{review.foodname}}</p>
+      <div>
+        <h3>{{review.rating}} stars</h3>
+        <p>{{review.text}}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

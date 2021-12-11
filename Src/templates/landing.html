@@ -7,8 +7,22 @@
     <div class="dhallcard">
       <!-- <img src="{{dhall.image}}" /> -->
       <h3>{{dhall.name}}</h3>
+      {% for dhallstat in dininghallstats %} {% if dhall.name == dhallstat.name
+      %}
+      <p>{{'%0.2f'| format(dhallstat.avg_rating|float)}} stars</p>
+      {% endif %} {% endfor %}
     </div>
   </a>
+  {% endfor %}
+</div>
+
+<h3>Statistics</h3>
+<div class="dhallcard">
+  <h4>Top 20 dishes</h4>
+  {% for itemstat in menuitemstats %}
+  <p>
+    {{itemstat.foodname}}: {{'%0.2f'| format(itemstat.avg_rating|float)}} stars
+  </p>
   {% endfor %}
 </div>
 {% endblock %}
