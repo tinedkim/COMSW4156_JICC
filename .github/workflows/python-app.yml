@@ -60,7 +60,6 @@ jobs:
         coverage run -m unittest discover
         coverage report -m
         coverage xml -i
-        mv coverage.xml ../github/workflows/
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       env:
