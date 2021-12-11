@@ -56,9 +56,10 @@ jobs:
     - name: Testing
       working-directory: ./Src
       run: |
-        pytest --cov=./ --cov-report=xml --doctest-modules
-        # coverage run -m unittest discover
-        # coverage report -m
+        # pytest --cov=./ --cov-report=xml --doctest-modules
+        coverage run -m unittest discover
+        coverage xml -i
+        mv coverage.xml ../github/workflows/
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       env:
