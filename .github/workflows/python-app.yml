@@ -58,6 +58,7 @@ jobs:
       run: |
         # pytest --cov=./ --cov-report=xml --doctest-modules
         coverage run -m unittest discover
+        coverage report -m
         coverage xml -i
         mv coverage.xml ../github/workflows/
     - name: SonarCloud Scan
