@@ -72,7 +72,7 @@ jobs:
         ip: localhost 
       run: |
         # pytest --cov=./ --cov-report=xml --doctest-modules
-        coverage run -m unittest discover
+        coverage run -m unittest discover -s Src
         coverage report -m
         coverage xml -i
     - name: SonarCloud Scan
