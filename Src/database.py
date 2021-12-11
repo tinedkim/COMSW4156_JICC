@@ -91,15 +91,15 @@ def getUserReviews(uni):
 
 
 def getUserReviewItemid(uni):
-    return getRows(executeQuery('SELECT fooditemid\
-                                 FROM review where\
-                                 uni = %s', [uni]))
+    return getRows(executeQuery('SELECT R.fooditemid, F.foodname, F.imageurl\
+                                 FROM review R, foodItem F  where\
+                                 uni = %s AND F.fooditemid = R.fooditemid', [uni]))
 
 
 def sendReview(uni, review, rating, foodItem, date):
     try:
-        executeQuery('INSERT INTO review(text, rating, uni, fooditemid)\
-                      VALUES(%s, %s, %s, %s)', [review, rating, uni, foodItem, date], returnResults=False )
+        executeQuery('INSERT INTO review(text, rating, uni, fooditemid, date)\
+                      VALUES(%s, %s, %s, %s, %s)', [review, rating, uni, foodItem, date], returnResults=False )
         return 1
     except:
         return -1
@@ -112,6 +112,7 @@ def getTopMenuItems():
                                  GROUP by fooditem.fooditemid\
                                  ORDER by avg_rating desc\
                                  FETCH FIRST 10 ROWS ONLY'))
+
 
 def getTopDiningHalls():
     return getRows(executeQuery('SELECT name, avg(rating) as avg_rating\

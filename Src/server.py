@@ -2,6 +2,8 @@
 Begin server at 3000 and expose endpoints
 '''
 import os
+
+from sqlalchemy.sql.functions import user
 import database
 from flask import Flask, render_template, request, redirect, jsonify
 from json import dumps
@@ -17,6 +19,8 @@ static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
 app = Flask(__name__, template_folder=tmpl_dir, static_folder=static_dir)
 
 csrf = CSRFProtect(app)
+today = date.today()
+now = datetime.now()
 
 # login Page
 @app.route('/login')
@@ -62,22 +66,25 @@ def checkCredentials():
 def profile(uni):
     reviews = database.getUserReviews(uni)
     foodIDs = database.getUserReviewItemid(uni)
-    return render_template("profile.html", uni = uni, reviews = reviews, foodIDs = foodIDs)
+    userreviews = []
+    for review, id in zip(reviews, foodIDs):
+        userreviews.append({**review, **id})
+    print(userreviews)
+    return render_template("profile.html", uni = uni, userreviews = userreviews)
+
 
 # add menu item review
 @app.route('/<uni>/addReview', methods = ['GET', 'POST'])
 def addReview(uni):
-    today = date.today()
-    now = datetime.now()
     if request.method == 'POST':
         review = request.form['review']
         rating = request.form['rating']
         foodItem = request.form['foodItem']
         date = today.strftime("%B %d, %Y")
         time = now.strftime("%H:%M:%S")
-        datetime = date +" " + time
+        datetime = date + " " + time
         valid = -1
-        valid = database.sendReview(uni, review, rating, foodItem)
+        valid = database.sendReview(uni, review, rating, foodItem, datetime)
         if valid == -1:
             return render_template("error.html")
         url = '/' + uni
@@ -85,6 +92,7 @@ def addReview(uni):
     else:
         foodItems = database.getFoodItems()
         return render_template("addReview.html", uni = uni, foodItems = foodItems)
+
 
 # get dining hall menu items
 @app.route('/getDiningMenu/<diningHall>')
@@ -173,7 +181,10 @@ def get_dining_hall_sign_ins():
 #home page
 @app.route("/")
 def landingPage():
-    return render_template("landing.html", dininghalls = database.get_dining_halls())
+    dininghallstats = database.getTopDiningHalls()
+    menuitemstats = database.getTopMenuItems()
+    return render_template("landing.html", dininghalls = database.getDiningHalls(),
+                           dininghallstats = dininghallstats, menuitemstats = menuitemstats)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=3000, debug=True)
