@@ -11,12 +11,14 @@ from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from requests import get
 from werkzeug.wrappers import CommonRequestDescriptorsMixin
+from flask_wtf.csrf import CSRFProtect
 from datetime import date, datetime
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
 app = Flask(__name__, template_folder=tmpl_dir, static_folder=static_dir)
 
+csrf = CSRFProtect(app)
 today = date.today()
 now = datetime.now()
 
@@ -94,22 +96,53 @@ def addReview(uni):
 
 # get dining hall menu items
 @app.route('/getDiningMenu/<diningHall>')
-def getDiningMenuItems(diningHall):
-    return render_template("dininghall.html", menu = database.getDiningHallMenuItems(diningHall))
-
+def get_dining_menu_items(diningHall):
+    items = database.get_dining_hall_menu_items(diningHall)
+    return {"diningMenu":items} 
 
 # get dining halls
 @app.route('/getDiningHalls')
-def getDiningHalls():
-    queryName = "diningHalls"
-    return {queryName: database.getDiningHalls()}
+def get_dining_halls():
+    return {"diningHalls": database.get_dining_halls()}
+#Login Page
+# @app.route('/login')
+# def login():
+#     return "<p>Login here</p>"
 
+# #Signup Page
+# @app.route('/signup')
+# def signup():
+#     return "<p>Sign up here</p>"
+
+#check user credentials
+# @app.route('/checkCredentials')
+# def check_credentials():
+#     queryName = "checkCredentials"
+#     return {queryName: []}
+
+#get top menu items
+# @app.route("/topMenuItems")
+# def get_top_menu_items():
+#     queryName = "topMenuItems"
+#     return {queryName: []}
+
+#get top dining halls
+# @app.route("/topDiningHalls")
+# def get_top_dining_halls():
+#     queryName = "topDiningHalls"
+#     return {queryName: []}
+
+#get user history
+# @app.route("/getUserHistory")
+# def get_user_history():
+#     queryName = "getUserHistory"
+#     return {queryName: []}
 
 # get food items
 @app.route('/getFoodItems')
-def getFoodItems():
+def get_food_items():
     queryName = "getfoodItems"
-    return {queryName: database.getFoodItems()}
+    return {queryName: database.get_food_items()}
 
 
 # get food reviews
@@ -120,10 +153,9 @@ def getFoodReviews(foodId):
 
 # get dining hall swipes
 @app.route("/getDiningHallSwipes/<diningHall>")
-def getDiningHallSwipes(diningHall):
+def get_dining_hall_swipes(diningHall):
     queryName = "diningHallSwipes"
-    return {queryName: database.getReviewTimestampsForDiningHall(diningHall)}
-
+    return {queryName: database.get_review_timestamps_for_dining_hall(diningHall)}
 
 # get top menu items
 @app.route("/topMenuItems")
@@ -141,7 +173,7 @@ def getTopDiningHalls():
 
 # get dining hall sign ins
 @app.route("/getDiningHallSignIns")
-def getDiningHallSignIns():
+def get_dining_hall_sign_ins():
     queryName = "diningHallSignIns"
     return {queryName: database.getDiningHallSignIns()}
 
@@ -155,5 +187,4 @@ def landingPage():
                            dininghallstats = dininghallstats, menuitemstats = menuitemstats)
 
 if __name__ == '__main__':
-
     app.run(host="0.0.0.0", port=3000, debug=True)
