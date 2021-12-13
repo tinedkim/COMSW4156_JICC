@@ -15,8 +15,8 @@ jjs_url = 'https://dining.columbia.edu/content/jjs-place-0'
 
 def get_content(idx, testing=False):
     urls = [ferris_url, john_jay_url, jjs_url]
-    html = ['../testing/ferris.html', '../testing/johnjay.html',
-            '../testing/jjs.html']
+    html = ['Src/testing/ferris.html', 'Src/testing/johnjay.html',
+            'Src/testing/jjs.html']
 
     if testing:
         html_file = open(html[idx], "r")
