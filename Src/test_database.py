@@ -47,10 +47,6 @@ class Test_TestDatabase(unittest.TestCase):
     def test_get_food_items(self):
         res = database.get_food_items()
         assert len(res) > 0
-    
-    def test_get_food_items(self):
-        res = database.get_food_items()
-        assert len(res) > 0
 
     def test_get_user_reviews(self):
         res = database.get_user_reviews('test')
@@ -75,14 +71,21 @@ class Test_TestDatabase(unittest.TestCase):
     def test_check_credentials(self):
         res = database.check_credentials('test', 'test@columbia.edu')
         assert res != -1
+        res = database.check_credentials(1,2)
+        assert res == -1
     
     def test_create_user(self):
         res = database.create_user('test', 'test', 'test@columbia.edu')
         assert res != -1
-    
+        res = database.create_user('test', 'test', 'test@columbia.edu')
+        assert res == -1
+
     def test_send_review(self):
         res = database.send_review('test', 'test', '1', '1', 'December 19, 2021')
         assert res != -1
+        res = database.send_review(1,2,3,4,5)
+        assert res == -1
+
 
 if __name__ == '__main__':
     unittest.main()
