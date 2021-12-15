@@ -18,7 +18,7 @@
 
 <h3>Statistics</h3>
 <div class="dhallcard">
-  <h4>Top 20 dishes</h4>
+  <h4>Top 10 dishes</h4>
   {% for itemstat in menuitemstats %}
   <p>
     {{itemstat.foodname}}: {{'%0.2f'| format(itemstat.avg_rating|float)}} stars

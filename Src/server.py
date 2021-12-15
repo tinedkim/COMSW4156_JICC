@@ -155,6 +155,7 @@ def get_dining_hall_sign_ins():
 def landingPage():
     dininghallstats = database.get_top_dining_halls()
     menuitemstats = database.get_top_menu_items()
+    print(dininghallstats)
     return render_template("landing.html", dininghalls = database.get_dining_halls(),
                            dininghallstats = dininghallstats, menuitemstats = menuitemstats)
 
