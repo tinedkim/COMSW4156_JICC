@@ -54,11 +54,11 @@ class Test_TestDatabase(unittest.TestCase):
 
     def test_get_user_reviews(self):
         res = database.get_user_reviews('test')
-        assert len(res) > 0
+        assert len(res) != 0
 
     def test_get_user_review_item_id(self):
         res = database.get_user_review_item_id('test')
-        assert len(res) > 0
+        assert len(res) != 0
 
     def test_get_top_menu_items(self):
         res = database.get_top_menu_items()
