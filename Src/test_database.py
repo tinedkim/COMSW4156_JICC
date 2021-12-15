@@ -86,11 +86,11 @@ class Test_TestDatabase(unittest.TestCase):
 
     def test_get_user_reviews(self):
         res = database.get_user_reviews('test')
-        assert len(res) > 0
+        assert res != null
 
     def test_get_user_review_item_id(self):
         res = database.get_user_review_item_id('test')
-        assert len(res) > 0
+        assert res != null
 
     def test_get_top_menu_items(self):
         res = database.get_top_menu_items()
@@ -107,13 +107,13 @@ class Test_TestDatabase(unittest.TestCase):
     def test_check_credentials(self):
         res = database.check_credentials('test', 'test@columbia.edu')
         assert res != -1
-        res = database.check_credential('false', 'false')
+        res = database.check_credentials('false', 'false')
         assert res == -1
     
     def test_create_user(self):
         res = database.create_user('test', 'test', 'test@columbia.edu')
         assert res != -1
-        res = database.create_user(1,2,3)
+        res = database.create_user('test', 'test', 'test@columbia.edu')
         assert res == -1
 
     def test_send_review(self):
