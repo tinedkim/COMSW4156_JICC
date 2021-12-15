@@ -107,7 +107,7 @@ class Test_TestDatabase(unittest.TestCase):
     def test_check_credentials(self):
         res = database.check_credentials('test', 'test@columbia.edu')
         assert res != -1
-        res = database.check_credentials('false', 'false')
+        res = database.check_credentials(1,2)
         assert res == -1
     
     def test_create_user(self):
