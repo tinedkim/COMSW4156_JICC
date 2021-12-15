@@ -75,14 +75,20 @@ class Test_TestDatabase(unittest.TestCase):
     def test_check_credentials(self):
         res = database.check_credentials('test', 'test@columbia.edu')
         assert res != -1
+        res = database.check_credential('false', 'false')
+        assert res == -1
     
     def test_create_user(self):
         res = database.create_user('test', 'test', 'test@columbia.edu')
         assert res != -1
-    
+        res = database.create_user(1,2,3)
+        assert res == -1
+
     def test_send_review(self):
         res = database.send_review('test', 'test', '1', '1', 'December 19, 2021')
         assert res != -1
+        res = database.send_review(1,2,3,4,5)
+        assert res == -1
 
 if __name__ == '__main__':
     unittest.main()
