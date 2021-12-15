@@ -17,8 +17,10 @@ from datetime import date, datetime
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
 app = Flask(__name__, template_folder=tmpl_dir, static_folder=static_dir)
+app.config['SECRET_KEY'] = 'JICC' 
 
-csrf = CSRFProtect(app)
+
+# csrf = CSRFProtect(app)
 today = date.today()
 now = datetime.now()
 
@@ -56,7 +58,7 @@ def checkCredentials():
     name = request.form['name']
     email = request.form['email']
     valid = database.check_credentials(name, email)
-    if valid == -1:
+    if valid == -1 or len(valid) == 0:
         return render_template("login.html", valid = False)
     url = '/' + valid[0]['uni']
     return redirect(url)
@@ -92,7 +94,7 @@ def addReview(uni):
         return redirect(url)
     else:
         foodItems = database.get_food_items()
-        return render_template("addReview.html", uni = uni, foodItems = foodItems)
+        return render_template("addreview.html", uni = uni, foodItems = foodItems)
 
 
 # get dining hall menu items
