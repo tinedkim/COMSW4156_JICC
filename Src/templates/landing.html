@@ -3,7 +3,7 @@
 <h4>Choose a dining hall</h4>
 <div class="landinggrid">
   {% for dhall in dininghalls %}
-  <a href="{{ url_for('getDiningMenuItems', diningHall = dhall.id) }}">
+  <a href="{{ url_for('get_dining_menu_items', diningHall = dhall.id) }}">
     <div class="dhallcard">
       <!-- <img src="{{dhall.image}}" /> -->
       <h3>{{dhall.name}}</h3>
