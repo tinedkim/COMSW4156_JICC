@@ -80,7 +80,7 @@ def create_user(name, uni, email):
     try: 
         execute_query('INSERT INTO\
                       person(name, uni, email)\
-                      VALUES(%s, %s, %s)', [name, uni, email] )
+                      VALUES(%s, %s, %s)', [name, uni, email], returnResults = False )
         return 1
     except:
         return -1
