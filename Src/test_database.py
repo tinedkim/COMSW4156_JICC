@@ -76,11 +76,11 @@ class Test_TestDatabase(unittest.TestCase):
         res = database.check_credentials('test', 'test@columbia.edu')
         assert res != -1
     
-    def test_create_user():
+    def test_create_user(self):
         res = database.create_user('test', 'test', 'test@columbia.edu')
         assert res != -1
     
-    def test_send_review():
+    def test_send_review(self):
         res = database.send_review('test', 'test', '1', '1', 'December 19, 2021')
         assert res != -1
 
