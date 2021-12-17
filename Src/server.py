@@ -43,7 +43,6 @@ def create_user():
     name = request.form['name']
     uni = request.form['uni']
     email = request.form['email']
-    print(name, uni, email)
     valid = database.create_user(name, uni, email)
     if valid == -1:
         return render_template("signup.html", valid = False)
@@ -72,7 +71,6 @@ def profile(uni):
     userreviews = []
     for review, id in zip(reviews, foodIDs):
         userreviews.append({**review, **id})
-    print(userreviews)
     return render_template("profile.html", uni = uni, userreviews = userreviews)
 
 
@@ -100,8 +98,8 @@ def addReview(uni):
 # get dining hall menu items
 @app.route('/getDiningMenu/<diningHall>')
 def get_dining_menu_items(diningHall):
-    items = database.get_dining_hall_menu_items(diningHall)
-    return {"diningMenu":items} 
+    return render_template("dininghall.html", menu = database.get_dining_hall_menu_items(diningHall))
+
 
 # get dining halls
 @app.route('/getDiningHalls')
@@ -155,8 +153,10 @@ def get_dining_hall_sign_ins():
 def landingPage():
     dininghallstats = database.get_top_dining_halls()
     menuitemstats = database.get_top_menu_items()
+    dailystats = database.get_daily_sign_ins()
     return render_template("landing.html", dininghalls = database.get_dining_halls(),
-                           dininghallstats = dininghallstats, menuitemstats = menuitemstats)
+                           dininghallstats = dininghallstats, menuitemstats = menuitemstats,
+                           dailystats=dailystats)
 
 
 if __name__ == '__main__':

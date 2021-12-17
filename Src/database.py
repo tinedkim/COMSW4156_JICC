@@ -131,3 +131,12 @@ def get_dining_hall_sign_ins():
                                  on review.fooditemid = fooditem.fooditemid\
                                  left join dininghall on dininghall.id = fooditem.dininghall\
                                  GROUP by name'))
+
+
+def get_daily_sign_ins():
+    return get_rows(execute_query("SELECT name, count(name)\
+                                 FROM review left join fooditem\
+                                 on review.fooditemid = fooditem.fooditemid\
+                                 left join dininghall on dininghall.id = fooditem.dininghall\
+                                 where review.date >= CURRENT_DATE - INTERVAL '1 DAY'\
+                                 GROUP by name"))

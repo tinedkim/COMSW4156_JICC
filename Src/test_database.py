@@ -67,6 +67,10 @@ class Test_TestDatabase(unittest.TestCase):
     def test_get_dining_hall_sign_ins(self):
         res = database.get_dining_hall_sign_ins()
         assert len(res) > 0
+    
+    def test_get_dining_hall_sign_ins(self):
+        res = database.get_dining_hall_sign_ins()
+        assert type(len(res)) is int
 
     def test_check_credentials(self):
         res = database.check_credentials('test', 'test@columbia.edu')

@@ -1,6 +1,9 @@
 {% extends "layout.html" %} {% block content %}
 <div class="reviewgrid">
     <h3>Reviews</h3>
+    {% if reviews|length == 0%}
+    <p> There are no reviews for this item. </p>
+    {% else %}
   {% for review in reviews %}
   <div class="review">
     <h3>{{review.rating}} stars
@@ -8,5 +11,6 @@
     <h5>Written by {{review.uni}} on {{review.date}}</h5>
   </div>
   {% endfor %}
+  {% endif %}
 </div>
 {% endblock %}
