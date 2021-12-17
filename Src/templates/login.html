@@ -1,12 +1,14 @@
 {% extends "layout.html" %} {% block content %}
 <form method="POST" class="login" action="/checkCredentials">
-  <div style="margin-right: 15px">Name: <input type="text" name="name" /></div>
-  <div style="margin-right: 15px">
+  <div style="margin-right: 15px" class="formelement">
+    Name: <input type="text" name="name" />
+  </div>
+  <div style="margin-right: 15px" class="formelement">
     Email: <input type="text" name="email" />
   </div>
   {% if valid == False %}
   <p>Invalid inputs. Please try again</p>
   {% endif %}
-  <button id="loginbutton">Login</button>
+  <button id="loginbutton" class="formelement">Login</button>
 </form>
 {% endblock %}

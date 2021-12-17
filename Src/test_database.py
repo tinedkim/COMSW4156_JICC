@@ -68,8 +68,8 @@ class Test_TestDatabase(unittest.TestCase):
         res = database.get_dining_hall_sign_ins()
         assert len(res) > 0
     
-    def test_get_dining_hall_sign_ins(self):
-        res = database.get_dining_hall_sign_ins()
+    def test_get_daily_sign_ins(self):
+        res = database.get_daily_sign_ins()
         assert type(len(res)) is int
 
     def test_check_credentials(self):
@@ -79,9 +79,10 @@ class Test_TestDatabase(unittest.TestCase):
         assert res == -1
     
     def test_create_user(self):
-        res = database.create_user('test', 'test', 'test@columbia.edu')
+        test_email = 'test@columbia.edu'
+        res = database.create_user('test', 'test', test_email)
         assert res != -1
-        res = database.create_user('test', 'test', 'test@columbia.edu')
+        res = database.create_user('test', 'test', test_email)
         assert res == -1
 
     def test_send_review(self):

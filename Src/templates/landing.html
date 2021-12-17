@@ -5,7 +5,6 @@
   {% for dhall in dininghalls %}
   <a href="{{ url_for('get_dining_menu_items', diningHall = dhall.id) }}">
     <div class="dhallcard">
-      <!-- <img src="{{dhall.image}}" /> -->
       <h3>{{dhall.name}}</h3>
       {% for dhallstat in dininghallstats %} {% if dhall.name == dhallstat.name
       %}
@@ -19,7 +18,7 @@
   {% endfor %}
 </div>
 
-<div class="dhallcard">
+<div class="dhallcard" id="stats">
   <h4>Top 10 dishes</h4>
   {% for itemstat in menuitemstats %}
   <p>

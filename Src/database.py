@@ -17,12 +17,12 @@ DATABASEURI = "postgresql://postgres:jicc@{0}/postgres".format(ip)
 
 engine = create_engine(DATABASEURI)
 
-def execute_query(query, values = None, returnResults = True):
+def execute_query(query, values = None, return_results = True):
     with engine.connect() as connection:
         cursor = connection.execute(query) if values is None\
             else connection.execute(query, *values)
         results = None
-        if returnResults:
+        if return_results:
             results = cursor.fetchall()
         connection.close()
         return results
@@ -47,20 +47,20 @@ def get_rows(cur):
     return [dict(result) for result in cur]
 
 
-def get_dining_hall_menu_items(diningHall):
-    return get_rows(execute_query('SELECT* FROM foodItem where diningHall = %s', [diningHall]))
+def get_dining_hall_menu_items(dining_hall):
+    return get_rows(execute_query('SELECT* FROM foodItem where diningHall = %s', [dining_hall]))
     
 
 def get_dining_halls():
     return get_rows(execute_query('SELECT * FROM diningHall'))
 
 
-def get_reviews_for_food_item(foodItemId):
-    return get_rows(execute_query('SELECT * FROM REVIEW where foodItemId = %s', [foodItemId]))
+def get_reviews_for_food_item(food_item_id):
+    return get_rows(execute_query('SELECT * FROM REVIEW where foodItemId = %s', [food_item_id]))
 
 
-def get_review_timestamps_for_dining_hall(diningHall):
-    return get_rows(execute_query('SELECT date FROM REVIEW inner join foodItem on foodItem.foodItemID = review.foodItemId WHERE foodItem.diningHall = %s', [diningHall]))
+def get_review_timestamps_for_dining_hall(dining_hall):
+    return get_rows(execute_query('SELECT date FROM REVIEW inner join foodItem on foodItem.foodItemID = review.foodItemId WHERE foodItem.diningHall = %s', [dining_hall]))
 
 
 def get_food_items():
@@ -72,7 +72,7 @@ def check_credentials(name, email):
         return get_rows(execute_query('SELECT uni FROM\
                                   person WHERE name = %s\
                                   and email = %s', [name, email]))
-    except:
+    except Exception as e:
         return -1
 
 
@@ -80,9 +80,9 @@ def create_user(name, uni, email):
     try: 
         execute_query('INSERT INTO\
                       person(name, uni, email)\
-                      VALUES(%s, %s, %s)', [name, uni, email], returnResults=False)
+                      VALUES(%s, %s, %s)', [name, uni, email], return_results=False)
         return 1
-    except:
+    except Exception as e:
         return -1
 
 
@@ -98,12 +98,12 @@ def get_user_review_item_id(uni):
                                  uni = %s AND F.fooditemid = R.fooditemid', [uni]))
 
 
-def send_review(uni, review, rating, foodItem, date):
+def send_review(uni, review, rating, food_item, date):
     try:
         execute_query('INSERT INTO review(text, rating, uni, fooditemid, date)\
-                      VALUES(%s, %s, %s, %s, %s)', [review, rating, uni, foodItem, date], returnResults=False )
+                      VALUES(%s, %s, %s, %s, %s)', [review, rating, uni, food_item, date], return_results=False )
         return 1
-    except:
+    except Exception as e:
         return -1
 
 
