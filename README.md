@@ -26,6 +26,21 @@ COMS W4156 Team Project: JICC
 ```python
 @app.route("/getDiningHallSwipes/<diningHall>")
 ```
+6. get top menu items
+- this API returns the top 10 rated menu items based on the reviews submitted by users.
+```python
+@app.route("/topMenuItems")
+```
+7. get top dining halls
+- this API returns the top rated dining halls in order from most popular to least popular based on the reviews submitted by users.
+```python
+@app.route("/topDiningHalls")
+```
+8. get dining hall sign ins
+- this API returns the number of dining hall sign ins per dining hall.
+```python
+@app.route("/getDiningHallSignIns")
+```
 
 
 # Development

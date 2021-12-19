@@ -43,7 +43,6 @@ def create_user():
     name = request.form['name']
     uni = request.form['uni']
     email = request.form['email']
-    print(name, uni, email)
     valid = database.create_user(name, uni, email)
     if valid == -1:
         return render_template("signup.html", valid = False)
@@ -53,7 +52,7 @@ def create_user():
 
 # check user credentials
 @app.route('/checkCredentials', methods = ['POST'])
-def checkCredentials():
+def check_credentials():
     valid = -1
     name = request.form['name']
     email = request.form['email']
@@ -72,13 +71,12 @@ def profile(uni):
     userreviews = []
     for review, id in zip(reviews, foodIDs):
         userreviews.append({**review, **id})
-    print(userreviews)
     return render_template("profile.html", uni = uni, userreviews = userreviews)
 
 
 # add menu item review
 @app.route('/<uni>/addReview', methods = ['GET', 'POST'])
-def addReview(uni):
+def add_review(uni):
     if request.method == 'POST':
         review = request.form['review']
         rating = request.form['rating']
@@ -100,8 +98,8 @@ def addReview(uni):
 # get dining hall menu items
 @app.route('/getDiningMenu/<diningHall>')
 def get_dining_menu_items(diningHall):
-    items = database.get_dining_hall_menu_items(diningHall)
-    return {"diningMenu":items} 
+    return render_template("dininghall.html", menu = database.get_dining_hall_menu_items(diningHall))
+
 
 # get dining halls
 @app.route('/getDiningHalls')
@@ -118,7 +116,7 @@ def get_food_items():
 
 # get food reviews
 @app.route("/getFoodReviews/<foodId>")
-def getFoodReviews(foodId):
+def get_food_reviews(foodId):
     return render_template("reviews.html", reviews = database.get_reviews_for_food_item(foodId), food = foodId)
 
 
@@ -131,14 +129,14 @@ def get_dining_hall_swipes(diningHall):
 
 # get top menu items
 @app.route("/topMenuItems")
-def getTopMenuItems():
+def get_top_menu_items():
     queryName = "topMenuItems"
     return {queryName: database.get_top_menu_items()}
 
 
 # get top dining halls
 @app.route("/topDiningHalls")
-def getTopDiningHalls():
+def get_top_dining_halls():
     queryName = "topDiningHalls"
     return {queryName: database.get_top_dining_halls()}
 
@@ -152,12 +150,13 @@ def get_dining_hall_sign_ins():
 
 #home page
 @app.route("/")
-def landingPage():
+def landing_page():
     dininghallstats = database.get_top_dining_halls()
     menuitemstats = database.get_top_menu_items()
-    print(dininghallstats)
+    dailystats = database.get_daily_sign_ins()
     return render_template("landing.html", dininghalls = database.get_dining_halls(),
-                           dininghallstats = dininghallstats, menuitemstats = menuitemstats)
+                           dininghallstats = dininghallstats, menuitemstats = menuitemstats,
+                           dailystats=dailystats)
 
 
 if __name__ == '__main__':

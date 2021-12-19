@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <title>CULFA</title>
     <link
@@ -11,10 +12,23 @@
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{{ url_for('static', filename='favicon.png')}}"
+    />
   </head>
   <body>
     <header>
-      <a href="/"> <h1>CULFA</h1> </a>
+      <a href="/" class="homebutton">
+        <img
+          src="{{ url_for('static', filename='favicon.png')}}"
+          width="50"
+          height="50"
+          alt="icon"
+        />
+        <h1>CULFA</h1>
+      </a>
       <div class="nav">
         <a href="{{ url_for('signup') }}">Sign up</a>
         <a href="{{ url_for('login') }}">Log in</a>

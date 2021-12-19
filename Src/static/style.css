@@ -28,6 +28,15 @@ main {
   justify-content: center;
 }
 
+.homebutton {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 170px;
+  color: #5f8eae;
+}
+
 .nav {
   width: 125px;
   display: flex;
@@ -40,7 +49,8 @@ main {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .dhallcard {
@@ -50,9 +60,19 @@ main {
   align-items: center;
   border-radius: 1rem;
   width: 250px;
+  height: 200px;
   padding: 25px;
-  margin: 30 30 30 30;
+  margin: 30px;
   box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
+}
+
+#stats {
+  height: 650px;
+  width: 400px;
+}
+
+.formelement {
+  margin-top: 10px;
 }
 
 /* Dininghall */
@@ -71,7 +91,7 @@ main {
   align-items: center;
   border-radius: 1rem;
   padding: 25px;
-  margin: 30 30 30 30;
+  margin: 30px;
   box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
 }
 
@@ -96,6 +116,6 @@ main {
   align-items: flex-start;
   border-radius: 1rem;
   padding: 25px;
-  margin: 30 30 30 30;
+  margin: 30px;
   box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
 }
