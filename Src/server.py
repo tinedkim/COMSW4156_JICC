@@ -52,7 +52,7 @@ def create_user():
 
 # check user credentials
 @app.route('/checkCredentials', methods = ['POST'])
-def check_credentials():
+def checkCredentials():
     valid = -1
     name = request.form['name']
     email = request.form['email']
@@ -76,7 +76,7 @@ def profile(uni):
 
 # add menu item review
 @app.route('/<uni>/addReview', methods = ['GET', 'POST'])
-def add_review(uni):
+def addReview(uni):
     if request.method == 'POST':
         review = request.form['review']
         rating = request.form['rating']
@@ -116,7 +116,7 @@ def get_food_items():
 
 # get food reviews
 @app.route("/getFoodReviews/<foodId>")
-def get_food_reviews(foodId):
+def getFoodReviews(foodId):
     return render_template("reviews.html", reviews = database.get_reviews_for_food_item(foodId), food = foodId)
 
 
@@ -129,14 +129,14 @@ def get_dining_hall_swipes(diningHall):
 
 # get top menu items
 @app.route("/topMenuItems")
-def get_top_menu_items():
+def getTopMenuItems():
     queryName = "topMenuItems"
     return {queryName: database.get_top_menu_items()}
 
 
 # get top dining halls
 @app.route("/topDiningHalls")
-def get_top_dining_halls():
+def getTopDiningHalls():
     queryName = "topDiningHalls"
     return {queryName: database.get_top_dining_halls()}
 
@@ -150,7 +150,7 @@ def get_dining_hall_sign_ins():
 
 #home page
 @app.route("/")
-def landing_page():
+def landingPage():
     dininghallstats = database.get_top_dining_halls()
     menuitemstats = database.get_top_menu_items()
     dailystats = database.get_daily_sign_ins()
